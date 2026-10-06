@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Android support · native-api-bindgen docs</title>
+  <meta name="description" content="android.jar contains only public SDK stubs. A class absent from api-versions.xml is classified hidden_or_non_sdk (E006) and never generated, and the same…">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Android support · native-api-bindgen docs">
+  <meta property="og:description" content="android.jar contains only public SDK stubs. A class absent from api-versions.xml is classified hidden_or_non_sdk (E006) and never generated, and the same…">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Android support","description":"android.jar contains only public SDK stubs. A class absent from api-versions.xml is classified hidden_or_non_sdk (E006) and never generated, and the same…","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Guides</nav>
+    <h1>Android support</h1>
+<h2 id="what-is-read">What is read<a class="anchor" href="#what-is-read" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>platforms/android-N/android.jar</code></td>
+<td>classes, members, JVM descriptors, generic signatures, modifiers, constants, inheritance, class-file annotations, parameter names (<code>LocalVariableTable</code>/<code>MethodParameters</code>)</td>
+</tr>
+<tr>
+<td><code>platforms/android-N/data/api-versions.xml</code></td>
+<td>introduced / deprecated / removed API levels (including minor levels such as 36.1); ancestor-aware so overrides inherit availability</td>
+</tr>
+<tr>
+<td><code>platforms/android-N/data/annotations.zip</code></td>
+<td>external annotations (<code>IntDef</code>, <code>RequiresPermission</code>, threading, ranges, …)</td>
+</tr>
+<tr>
+<td><code>platform.android.libraries</code> / <code>--jar</code></td>
+<td>optional library artifacts (<code>.jar</code>, <code>.aar</code>, class directories), e.g. a Kotlin library; their classes are library APIs (no <code>api-versions.xml</code> classification, no platform doc links)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="supported-in-this-version">Supported in this version<a class="anchor" href="#supported-in-this-version" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>Classes, interfaces, enums, nested (static and inner) types</li>
+<li>Constructors, static/instance methods, overloads, varargs, fields, compile-time constants (exact values)</li>
+<li>Nullability from <code>android.annotation</code>/<code>androidx.annotation</code> (incl. <code>Recently*</code>)</li>
+<li>Availability with runtime guards for APIs newer than <code>minApi</code></li>
+<li>Threading and permission metadata in generated docs</li>
+<li>Implementing Java interfaces in Dart (callbacks/listeners)</li>
+<li>Java exceptions surfaced as <code>NativeJavaException</code></li>
+<li>Generics (Flutter): generated types and methods take Dart type parameters (<code>GenericClass&lt;$T&gt;</code>, <code>first&lt;$E&gt;(…)</code>), parameterized types keep their arguments (<code>JList&lt;JString?&gt;</code>), results are cast for free (every wrapper is a <code>JObject</code> at run time); supertypes stay raw. <code>java.util.List/Map/Set/Collection/Iterator</code> and boxed numbers map to <code>package:jni</code>'s wrappers when not generated. On android-36 this removed all 2,384 <code>E003</code> notes of the Flutter target.</li>
+<li>Bean properties (Flutter and React Native): <code>getX()</code>/<code>isX()</code> plus a matching <code>void setX(T)</code> also generate a property <code>x</code> backed by the native getter/setter (<code>uri.scheme</code>, <code>intent.data</code>, <code>paint.underlineText = true</code>). The methods stay; a property is skipped when its name is already a member or a type name, and it is read-only when the setter's type differs from the getter's. android-36: 12,513 properties (Flutter), 11,886 (React Native).</li>
+<li>Typed constants (Flutter and React Native): <code>@IntDef</code>/<code>@LongDef</code>/<code>@StringDef</code> from <code>annotations.zip</code> become a typed set per owner, named from the constants' shared prefix (<code>Intent.FLAG_*</code> → <code>Intent$Flag</code>, <code>Context.*_SERVICE</code> → <code>Context$Service</code>). Sets with the same name in one owner are merged (union). Dart: a <code>const</code> extension type that implements <code>int</code>/<code>String</code> (flag sets add <code>|</code> and <code>has</code>), so values pass wherever the API takes the raw type. TypeScript: an <code>as const</code> object plus a union type (non-flag sets). Parameters keep the raw type in every mode; in <code>ergonomic-dart</code> / <code>ergonomic-typescript</code>, results are typed with the set. Values are the SDK constants, never altered. android-36: 851 sets over 2,109 use sites; 467 use sites stay documented only (constants from several owners or outside the selection, or no shared name).</li>
+<li>Kotlin <code>suspend</code> functions: detected from the compiled JVM signature (trailing <code>kotlin.coroutines.Continuation&lt;? super T&gt;</code>). Flutter: <code>Future&lt;T&gt;</code> over <code>package:jni</code>'s <code>PortContinuation</code>. React Native: <code>Promise&lt;T&gt;</code> over the runtime's <code>NabContinuation</code> (a reflective <code>Continuation</code> proxy; the promise settles on the JS thread through <code>CallInvoker</code>). Boxed results are unboxed (<code>Int</code> → <code>int</code> / <code>number</code>), <code>Unit</code> → <code>void</code>, Kotlin exceptions → <code>NativeJavaException</code> / <code>NativeJavaError</code>. The app needs <code>kotlinx-coroutines-android</code> at run time.</li>
+<li><code>kotlin.Metadata</code> (pure-Dart, bounded protobuf reader; fuzz-tested): suspend results are non-null when Kotlin declares them so (<code>Future&lt;String&gt;</code> vs <code>Future&lt;String?&gt;</code>); type-argument nullability (<code>Flow&lt;String?&gt;</code>, <code>List&lt;Int&gt;</code>); nullability of unannotated members; Kotlin parameter names when the class file has none; default arguments are reported (<code>E002</code> info: pass every argument). Kotlin properties surface through their accessors as bean properties. Validated on kotlin-stdlib 2.4.20 (7,450 of 7,567 functions matched to class-file methods; the rest are annotation-class constructors and a few <code>KFunction</code> signatures) and kotlinx-coroutines-core 1.10.2 (1,930 of 1,945).</li>
+<li>Kotlin <code>Flow&lt;T&gt;</code> (Flutter): generated as <code>Stream&lt;T&gt;</code>; collection starts on <code>listen</code> (a Dart <code>FlowCollector</code>), errors arrive as stream errors, cancelling the subscription aborts the flow at its next <code>emit</code>. Values are buffered (no backpressure). React Native exposes <code>Flow</code> as an opaque <code>JavaObject</code> for now.</li>
+</ul>
+<h2 id="not-yet-supported-reported-with-reason-codes">Not yet supported (reported with reason codes)<a class="anchor" href="#not-yet-supported-reported-with-reason-codes" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Construct</th>
+<th>Code</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protected members</td>
+<td>E002</td>
+<td>require subclassing Java classes from Dart</td>
+</tr>
+<tr>
+<td>Constructors of abstract classes</td>
+<td>E002</td>
+<td></td>
+</tr>
+<tr>
+<td>Annotation interfaces</td>
+<td>E002</td>
+<td>metadata, not callable</td>
+</tr>
+<tr>
+<td>Generic type parameters (React Native only)</td>
+<td>E003</td>
+<td>TypeScript erases them to bounds; the Flutter target generates Dart type parameters (Java bounds are documented, not repeated)</td>
+</tr>
+<tr>
+<td>Types outside the selected closure</td>
+<td>E016</td>
+<td>exposed as <code>JObject</code>; add with <code>--entry</code></td>
+</tr>
+<tr>
+<td>Kotlin default arguments</td>
+<td>E002 (info)</td>
+<td>not applied through JNI; pass every argument (or use <code>@JvmOverloads</code> overloads)</td>
+</tr>
+<tr>
+<td>Kotlin <code>Flow</code> on React Native</td>
+<td>E016</td>
+<td>exposed as an opaque <code>JavaObject</code> (Flutter: <code>Stream</code>)</td>
+</tr>
+<tr>
+<td>Native UI (embedding Android <code>View</code>s)</td>
+<td>—</td>
+<td>separate integration layer planned</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="hidden--non-sdk-apis">Hidden / non-SDK APIs<a class="anchor" href="#hidden--non-sdk-apis" aria-label="Link to this section">#</a></h2>
+<p><code>android.jar</code> contains only public SDK stubs. A class absent from <code>api-versions.xml</code> is classified <code>hidden_or_non_sdk</code> (E006) and never generated, and the same applies to its members. Members present in public stubs but not listed (in practice: re-declared from a non-public superclass) are generated with <code>partial</code> support and an <code>E012</code> note because their availability is inferred, not listed.</p>
+<h2 id="measured-on-android-36-this-machine-see-docsbenchmarks">Measured on android-36 (this machine, see <code>docs/benchmarks</code>)<a class="anchor" href="#measured-on-android-36-this-machine-see-docsbenchmarks" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>Parse entire android.jar: 6,222 types in ~0.6 s</li>
+<li>Generate Flutter bindings for every package: 6,196 types, 95,888 members, 1,135,260 lines; <code>dart analyze</code> reports no issues</li>
+<li>Whole-SDK generation (compiled CLI, <code>/usr/bin/time -l</code>, 2026-10-05): 6,197 types, 95,922 members bound in 3.4 s wall time; peak resident memory 415,694,848 bytes (was 1,079,951,360 before the IR and binding map were written as streams; output byte-identical)</li>
+</ul>
+    <div class="doc-foot"><span>Source: <code>docs/android/README.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="../react-native/index.html"><small>Previous</small>React Native</a><a class="next" href="../ios/index.html"><small>Next</small>iOS / Apple (Flutter)</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="../getting-started/index.html">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="../react-native/index.html">React Native</a></li>
+<li><a href="index.html" aria-current="page">Android support</a></li>
+<li><a href="../ios/index.html">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="../compatibility/matrix.html">Compatibility matrix</a></li>
+<li><a href="../benchmarks/index.html">Benchmarks</a></li>
+<li><a href="../benchmarks/performance.html">Performance</a></li>
+<li><a href="../benchmarks/size.html">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="../legal/license-policy.html">License policy</a></li>
+<li><a href="../legal/source-provenance.html">Source provenance</a></li>
+<li><a href="../legal/android.html">Android legal / attribution policy</a></li>
+<li><a href="../legal/apple.html">Apple SDK policy</a></li>
+<li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
+<li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#what-is-read">What is read</a></li>
+      <li><a href="#supported-in-this-version">Supported in this version</a></li>
+      <li><a href="#not-yet-supported-reported-with-reason-codes">Not yet supported (reported with reason codes)</a></li>
+      <li><a href="#hidden--non-sdk-apis">Hidden / non-SDK APIs</a></li>
+      <li><a href="#measured-on-android-36-this-machine-see-docsbenchmarks">Measured on android-36 (this machine, see docs/benchmarks)</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

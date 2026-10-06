@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting started (Flutter on Android) · native-api-bindgen docs</title>
+  <meta name="description" content="Experimental. Generated bindings are derived from the Android SDK on your machine and are kept local by default.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Getting started (Flutter on Android) · native-api-bindgen docs">
+  <meta property="og:description" content="Experimental. Generated bindings are derived from the Android SDK on your machine and are kept local by default.">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Getting started (Flutter on Android)","description":"Experimental. Generated bindings are derived from the Android SDK on your machine and are kept local by default.","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Guides</nav>
+    <h1>Getting started (Flutter on Android)</h1>
+<blockquote>
+<p>Experimental. Generated bindings are derived from the Android SDK on your machine and are kept local by default.</p>
+</blockquote>
+<h2 id="prerequisites">Prerequisites<a class="anchor" href="#prerequisites" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>Flutter (Dart ≥ 3.9) — see <code>docs/compatibility/matrix.md</code> for tested versions</li>
+<li>Android SDK with at least one platform installed (<code>sdkmanager &quot;platforms;android-36&quot;</code>); <code>ANDROID_HOME</code> or the default Android Studio location</li>
+<li>A JDK only if you run the fixture/runtime tests of this repository</li>
+</ul>
+<h2 id="1-install-the-cli">1. Install the CLI<a class="anchor" href="#1-install-the-cli" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-bash">git clone &lt;this repository&gt; native-api-bindgen
+cd native-api-bindgen &amp;&amp; dart pub get
+dart pub global activate --source path packages/native_api_cli   # installs `native-api-bindgen`
+</code></pre>
+<p>(Once published: <code>dart pub global activate native_api_bindgen</code>. Inside this repository you can also use <code>dart run native_api_bindgen &lt;command&gt;</code>.)</p>
+<h2 id="2-check-your-machine">2. Check your machine<a class="anchor" href="#2-check-your-machine" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-bash">native-api-bindgen --project /path/to/your_app doctor
+</code></pre>
+<h2 id="3-configure">3. Configure<a class="anchor" href="#3-configure" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-bash">native-api-bindgen --project /path/to/your_app init
+</code></pre>
+<p>Edit <code>native_api_bindgen.yaml</code>: list the classes you need under <code>platform.android.entries</code> (dependency-aware) or <code>classes</code>/<code>include</code>. Generating the whole SDK is never implicit.</p>
+<h2 id="4-add-runtime-dependencies-to-your-app">4. Add runtime dependencies to your app<a class="anchor" href="#4-add-runtime-dependencies-to-your-app" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-yaml">dependencies:
+  jni: ^1.0.3
+  jni_flutter: ^1.0.3        # to obtain the application Context / Activity
+  native_api_runtime:
+    path: &lt;native-api-bindgen&gt;/runtimes/dart/native_api_runtime
+</code></pre>
+<h2 id="5-generate-and-use">5. Generate and use<a class="anchor" href="#5-generate-and-use" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-bash">native-api-bindgen --project /path/to/your_app generate flutter
+</code></pre>
+<pre><code class="language-dart">import 'package:jni/jni.dart';
+import 'package:jni_flutter/jni_flutter.dart' as jf;
+// Import with a prefix: Android names such as View, Text or Color would
+// otherwise clash with Flutter widgets.
+import 'src/generated/bindings.dart' as android;
+
+final ctx = jf.androidApplicationContext.as(android.Context.type);
+print(ctx.getPackageName()!.toDartString(releaseOriginal: true));
+
+final intent = android.Intent.new$String$Uri(
+  android.Intent.ACTION_VIEW.toJString(),
+  android.Uri.parse('https://example.com'.toJString()),
+);
+</code></pre>
+<p>Add <code>lib/src/generated/</code> and <code>.native_api_bindgen/</code> to <code>.gitignore</code>.</p>
+<h2 id="6-understand-what-you-got">6. Understand what you got<a class="anchor" href="#6-understand-what-you-got" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-bash">native-api-bindgen --project /path/to/your_app coverage
+native-api-bindgen --project /path/to/your_app why-generated 'android.content.Intent#setData'
+native-api-bindgen --project /path/to/your_app why-skipped 'android.app.Activity#onCreate'
+</code></pre>
+<p>A complete working app is in <code>examples/flutter/android_slice</code>.</p>
+    <div class="doc-foot"><span>Source: <code>docs/getting-started/README.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><span></span><a class="next" href="../flutter/index.html"><small>Next</small>Flutter / Dart target</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="index.html" aria-current="page">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="../react-native/index.html">React Native</a></li>
+<li><a href="../android/index.html">Android support</a></li>
+<li><a href="../ios/index.html">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="../compatibility/matrix.html">Compatibility matrix</a></li>
+<li><a href="../benchmarks/index.html">Benchmarks</a></li>
+<li><a href="../benchmarks/performance.html">Performance</a></li>
+<li><a href="../benchmarks/size.html">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="../legal/license-policy.html">License policy</a></li>
+<li><a href="../legal/source-provenance.html">Source provenance</a></li>
+<li><a href="../legal/android.html">Android legal / attribution policy</a></li>
+<li><a href="../legal/apple.html">Apple SDK policy</a></li>
+<li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
+<li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#1-install-the-cli">1. Install the CLI</a></li>
+      <li><a href="#2-check-your-machine">2. Check your machine</a></li>
+      <li><a href="#3-configure">3. Configure</a></li>
+      <li><a href="#4-add-runtime-dependencies-to-your-app">4. Add runtime dependencies to your app</a></li>
+      <li><a href="#5-generate-and-use">5. Generate and use</a></li>
+      <li><a href="#6-understand-what-you-got">6. Understand what you got</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

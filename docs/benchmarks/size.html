@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Binary size · native-api-bindgen docs</title>
+  <meta name="description" content="Measured 2026-10-05 with tools/measure_size.py --platform 36 (Flutter 3.41.9, package:jni 1.0.3, release APK, --target-platform android-arm64, macOS…">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Binary size · native-api-bindgen docs">
+  <meta property="og:description" content="Measured 2026-10-05 with tools/measure_size.py --platform 36 (Flutter 3.41.9, package:jni 1.0.3, release APK, --target-platform android-arm64, macOS…">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Binary size","description":"Measured 2026-10-05 with tools/measure_size.py --platform 36 (Flutter 3.41.9, package:jni 1.0.3, release APK, --target-platform android-arm64, macOS…","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Reference</nav>
+    <h1>Binary size</h1>
+<p>Measured 2026-10-05 with <code>tools/measure_size.py --platform 36</code> (Flutter 3.41.9, <code>package:jni</code> 1.0.3, release APK, <code>--target-platform android-arm64</code>, macOS arm64 host). Raw data: <a href="size-2026-10-05-android36.json"><code>size-2026-10-05-android36.json</code></a>. Uncompressed entry sizes are read from the APK; APK size is the file size.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variant</th>
+<th align="right">APK bytes</th>
+<th align="right">Δ APK vs baseline</th>
+<th align="right"><code>libapp.so</code> (Dart AOT)</th>
+<th align="right"><code>libdartjni.so</code></th>
+<th align="right"><code>classes*.dex</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline (no bindings)</td>
+<td align="right">14,426,402</td>
+<td align="right">—</td>
+<td align="right">2,687,920</td>
+<td align="right">0</td>
+<td align="right">526,004</td>
+</tr>
+<tr>
+<td>bindings imported, unused</td>
+<td align="right">14,776,680</td>
+<td align="right">+350,278</td>
+<td align="right">2,687,920</td>
+<td align="right">329,884</td>
+<td align="right">533,700</td>
+</tr>
+<tr>
+<td>one API (<code>Context.getPackageName</code>), slice bindings (24 types)</td>
+<td align="right">14,842,216</td>
+<td align="right">+415,814</td>
+<td align="right">2,753,456</td>
+<td align="right">329,884</td>
+<td align="right">533,700</td>
+</tr>
+<tr>
+<td>one API, <strong>bindings for every android.jar package</strong> (6,196 types, 95,888 members, ~1.1M lines)</td>
+<td align="right">14,842,216</td>
+<td align="right">+415,814</td>
+<td align="right">2,753,456</td>
+<td align="right">329,884</td>
+<td align="right">533,700</td>
+</tr>
+<tr>
+<td>full slice example (<code>examples/flutter/android_slice</code>, UI + all demos)</td>
+<td align="right">15,759,688</td>
+<td align="right">+1,333,286</td>
+<td align="right">3,670,960</td>
+<td align="right">329,884</td>
+<td align="right">533,724</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="findings">Findings<a class="anchor" href="#findings" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Unused generated APIs are not included.</strong> The app using one API with bindings generated for the entire SDK is byte-identical in size to the same app with a 24-type slice. With bindings imported but nothing called, <code>libapp.so</code> is identical to the baseline.</li>
+<li>The fixed overhead of the approach comes from <code>package:jni</code>'s native helper (<code>libdartjni.so</code>, 329,884 bytes uncompressed for arm64) and its Java support classes (+7,696 bytes of dex) — not from generated code.</li>
+<li>Calling one API added 65,536 bytes to <code>libapp.so</code>. This equals one 64 KiB segment-alignment step of the AOT snapshot, so the true code delta is not resolvable at this granularity.</li>
+</ul>
+<h2 id="react-native-android">React Native (Android)<a class="anchor" href="#react-native-android" aria-label="Link to this section">#</a></h2>
+<p>Measured 2026-10-05 with <code>tools/measure_rn_size.py --platform 36</code> (React Native 0.87.1, Hermes, release APK, arm64-v8a). Raw data: <a href="size-2026-10-05-rn-android36.json"><code>size-2026-10-05-rn-android36.json</code></a>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variant</th>
+<th align="right">APK bytes</th>
+<th align="right">Δ APK vs baseline</th>
+<th align="right">JS bundle (Hermes bytecode)</th>
+<th align="right"><code>libappmodules.so</code></th>
+<th align="right"><code>classes*.dex</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline (<code>@react-native-community/cli init</code>)</td>
+<td align="right">18,623,666</td>
+<td align="right">—</td>
+<td align="right">1,003,708</td>
+<td align="right">146,472</td>
+<td align="right">11,615,424</td>
+</tr>
+<tr>
+<td>one API, slice bindings (24 types)</td>
+<td align="right">19,312,390</td>
+<td align="right">+688,724</td>
+<td align="right">1,456,236</td>
+<td align="right">468,104</td>
+<td align="right">11,617,940</td>
+</tr>
+<tr>
+<td>one API, <strong>bindings for every android.jar package</strong> (6,196 types)</td>
+<td align="right">57,776,278</td>
+<td align="right">+39,152,612</td>
+<td align="right">29,319,676</td>
+<td align="right">11,060,840</td>
+<td align="right">11,617,940</td>
+</tr>
+</tbody>
+</table></div>
+<p>Findings:</p>
+<ul>
+<li><strong>Unlike Dart, React Native does not remove unused bindings.</strong> Metro does not tree-shake and the C++ member tables are looked up by name at runtime, so every generated class ships. With full-SDK bindings the APK grows by 39 MB. Generate only what the app uses (<code>entries</code> + <code>depth</code>); the slice costs 0.69 MB (runtime + 24 types).</li>
+<li>The fixed overhead (runtime + 24 types) is ~452 KB of Hermes bytecode and ~322 KB of native code.</li>
+</ul>
+<h2 id="flutter-on-ios-release-device-arm64-unsigned">Flutter on iOS (release, device arm64, unsigned)<a class="anchor" href="#flutter-on-ios-release-device-arm64-unsigned" aria-label="Link to this section">#</a></h2>
+<p>Measured 2026-10-05 with <code>tools/measure_ios_size.py</code> (<code>flutter build ios --release --no-codesign</code>, Xcode 27.0 SDK, deployment target 15.0). Raw data: <a href="size-startup-2026-10-05-wp7.json"><code>size-startup-2026-10-05-wp7.json</code></a>. Sizes are of the built <code>Runner.app</code> (an IPA is not produced without signing).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variant</th>
+<th align="right"><code>Runner.app</code> bytes</th>
+<th align="right">Δ vs baseline</th>
+<th align="right"><code>App.framework/App</code> (Dart AOT)</th>
+<th align="right"><code>objective_c.framework</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline (no bindings)</td>
+<td align="right">13,160,396</td>
+<td align="right">—</td>
+<td align="right">2,883,888</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>one API (<code>UIDevice.systemName</code>), 6-class bindings</td>
+<td align="right">13,463,333</td>
+<td align="right">+302,937</td>
+<td align="right">2,916,992</td>
+<td align="right">269,005</td>
+</tr>
+<tr>
+<td>one API, <strong>bindings for all of Foundation + UIKit</strong></td>
+<td align="right">13,463,317</td>
+<td align="right">+302,921</td>
+<td align="right">2,916,992</td>
+<td align="right">268,989</td>
+</tr>
+<tr>
+<td>full example (<code>examples/flutter/ios_slice</code>, incl. Swift adapters)</td>
+<td align="right">15,039,537</td>
+<td align="right">+1,879,141</td>
+<td align="right">3,812,080</td>
+<td align="right">268,813</td>
+</tr>
+</tbody>
+</table></div>
+<p>The Dart AOT binary is identical with 6-class bindings and with bindings for all of Foundation + UIKit: unused generated APIs are removed on iOS too. The fixed overhead is <code>package:objective_c</code>'s framework (~269 KB) plus 33,104 bytes of AOT code for the call.</p>
+<h2 id="android-app-bundle-flutter-release">Android App Bundle (Flutter, release)<a class="anchor" href="#android-app-bundle-flutter-release" aria-label="Link to this section">#</a></h2>
+<p><code>tools/measure_size.py --aab</code> (all ABIs in the bundle).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variant</th>
+<th align="right"><code>.aab</code> bytes</th>
+<th align="right">Δ vs baseline</th>
+<th align="right">arm64 <code>libapp.so</code></th>
+<th align="right">arm64 <code>libdartjni.so</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline</td>
+<td align="right">38,041,563</td>
+<td align="right">—</td>
+<td align="right">2,687,920</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>bindings imported, unused</td>
+<td align="right">38,227,476</td>
+<td align="right">+185,913</td>
+<td align="right">2,687,920</td>
+<td align="right">131,432</td>
+</tr>
+<tr>
+<td>one API, slice bindings</td>
+<td align="right">38,334,631</td>
+<td align="right">+293,068</td>
+<td align="right">2,753,456</td>
+<td align="right">131,432</td>
+</tr>
+<tr>
+<td>one API, bindings for every android.jar package</td>
+<td align="right">38,334,736</td>
+<td align="right">+293,173</td>
+<td align="right">2,753,456</td>
+<td align="right">131,432</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="startup-android-emulator">Startup (Android emulator)<a class="anchor" href="#startup-android-emulator" aria-label="Link to this section">#</a></h2>
+<p><code>tools/measure_startup.py</code> (<code>am start -W</code> TotalTime, 10 cold starts after one warm-up, API 37 arm64 emulator with software GPU): baseline median 4570.5 ms (range 3373–5406), one API with slice bindings 4793.5 ms (range 3573–5352). The ranges overlap almost entirely; this emulator cannot resolve a startup difference. Bindings do no work at startup (lazy class/method IDs).</p>
+<h2 id="not-measured-yet">Not measured yet<a class="anchor" href="#not-measured-yet" aria-label="Link to this section">#</a></h2>
+<p>Physical devices (none measured without consent), iOS startup, React Native iOS size.</p>
+    <div class="doc-foot"><span>Source: <code>docs/benchmarks/size.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="performance.html"><small>Previous</small>Performance</a><a class="next" href="../sources/official-sources.html"><small>Next</small>Official source registry</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="../getting-started/index.html">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="../react-native/index.html">React Native</a></li>
+<li><a href="../android/index.html">Android support</a></li>
+<li><a href="../ios/index.html">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="../compatibility/matrix.html">Compatibility matrix</a></li>
+<li><a href="index.html">Benchmarks</a></li>
+<li><a href="performance.html">Performance</a></li>
+<li><a href="size.html" aria-current="page">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="../legal/license-policy.html">License policy</a></li>
+<li><a href="../legal/source-provenance.html">Source provenance</a></li>
+<li><a href="../legal/android.html">Android legal / attribution policy</a></li>
+<li><a href="../legal/apple.html">Apple SDK policy</a></li>
+<li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
+<li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#findings">Findings</a></li>
+      <li><a href="#react-native-android">React Native (Android)</a></li>
+      <li><a href="#flutter-on-ios-release-device-arm64-unsigned">Flutter on iOS (release, device arm64, unsigned)</a></li>
+      <li><a href="#android-app-bundle-flutter-release">Android App Bundle (Flutter, release)</a></li>
+      <li><a href="#startup-android-emulator">Startup (Android emulator)</a></li>
+      <li><a href="#not-measured-yet">Not measured yet</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

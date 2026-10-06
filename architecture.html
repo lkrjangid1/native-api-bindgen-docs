@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Architecture — native-api-bindgen</title>
+  <meta name="description" content="How native-api-bindgen turns platform SDKs into a canonical IR and generates Dart and TypeScript bindings with small, data-driven runtimes.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Architecture — native-api-bindgen">
+  <meta property="og:description" content="How native-api-bindgen turns platform SDKs into a canonical IR and generates Dart and TypeScript bindings with small, data-driven runtimes.">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Architecture","description":"How native-api-bindgen turns platform SDKs into a canonical IR and generates Dart and TypeScript bindings with small, data-driven runtimes.","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="docs.html">Docs</a>
+          <a class="nav-link" href="examples.html">Examples</a>
+          <a class="nav-link" href="architecture.html" aria-current="page">Architecture</a>
+          <a class="nav-link" href="compatibility.html">Compatibility</a>
+          <a class="nav-link" href="faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h1>Architecture</h1>
+    
+  </div>
+</section>
+<div class="wrap page-body prose">
+<figure><img src="images/architecture-diagram.png" alt="Pipeline: Android and Apple SDK inputs are parsed into the Native IR, planned per target and emitted as Dart and TypeScript bindings with small runtimes." width="1672" height="941"></figure>
+<pre><code>android.jar + api-versions.xml + annotations.zip ─┐
+Xcode SDK headers (libclang) ─────────────────────┼─▶ Native IR ─▶ planner ─▶ emitters ─▶ Dart / TypeScript
+Swift symbol graphs (swift-symbolgraph-extract) ──┘   (JSON,          (per target:     + small runtimes
+                                                       stable IDs)     what is possible)</code></pre>
+
+<h2>Native IR</h2>
+<p>A platform-neutral, deterministic model: types, members, generics, nullability, per-platform availability, threading and provenance, with stable symbol IDs such as <code>android.content.Intent#setData(android.net.Uri)</code> or <code>UIKit.UIView#-initWithFrame:</code>. Every symbol carries a support status and, when it is not generated, a reason code.</p>
+
+<h2>Parsers</h2>
+<ul>
+  <li><strong>Android</strong>: pure-Dart readers for zip, class files and generic signatures; availability from <code>api-versions.xml</code>; annotations from <code>annotations.zip</code>; library jars and AARs; Kotlin <code>suspend</code> detected from the compiled signature.</li>
+  <li><strong>Apple</strong>: the Xcode toolchain's libclang via <code>dart:ffi</code>; Swift-only APIs from symbol graphs.</li>
+</ul>
+
+<h2>Emitters and runtimes</h2>
+<div class="table-wrap"><table>
+  <tr><th>Target</th><th>Generated</th><th>Runtime</th></tr>
+  <tr><td>Flutter / Android</td><td>Dart extension types, cached JNI method IDs</td><td><code>package:jni</code> + a small Dart runtime</td></tr>
+  <tr><td>Flutter / iOS</td><td>Dart extension types, typed <code>objc_msgSend</code> trampolines</td><td><code>package:objective_c</code></td></tr>
+  <tr><td>React Native / Android</td><td>TypeScript classes + member tables</td><td>C++ JSI runtime (JNI)</td></tr>
+  <tr><td>React Native / iOS</td><td>TypeScript classes + member tables</td><td>Objective-C++ JSI runtime (<code>NSInvocation</code>)</td></tr>
+</table></div>
+<figure><img src="images/runtime-flow.png" alt="What happens on a call: app code calls the generated binding, the runtime dispatches to JNI or the Objective-C runtime, and the result is converted back." width="1774" height="887" loading="lazy"></figure>
+<p>For React Native the generated C++ is data (sorted tables), so one runtime serves every API. Method signatures on iOS come from the Objective-C runtime itself; the generator only says how each value maps to JavaScript.</p>
+
+<h2>Determinism and safety</h2>
+<ul>
+  <li>Output is byte-stable for the same SDK and configuration (<code>verify-reproducible</code>).</li>
+  <li>Output paths are guarded against escapes and symlinks; stale files are removed only if this tool generated them.</li>
+  <li><code>audit-license</code> blocks SDK binaries, copied headers, AST dumps and symbol graphs from being committed.</li>
+</ul>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="./"><img src="icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="getting-started.html">Get started</a>
+        <a href="docs.html">Documentation</a>
+        <a href="examples.html">Examples</a>
+        <a href="compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="flutter.html">Flutter</a>
+        <a href="react-native.html">React Native</a>
+        <a href="android.html">Android</a>
+        <a href="ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="legal.html">License (Apache-2.0)</a>
+        <a href="legal.html">Legal &amp; source policy</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iOS / Apple (Flutter) · native-api-bindgen docs</title>
+  <meta name="description" content="Status: experimental. Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and UIKit (see below for what has been…">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="iOS / Apple (Flutter) · native-api-bindgen docs">
+  <meta property="og:description" content="Status: experimental. Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and UIKit (see below for what has been…">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"iOS / Apple (Flutter)","description":"Status: experimental. Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and UIKit (see below for what has been…","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Guides</nav>
+    <h1>iOS / Apple (Flutter)</h1>
+<p>Status: <strong>experimental</strong>. Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and UIKit (see below for what has been tested). React Native details: <code>docs/react-native/README.md</code>.</p>
+<h2 id="how-it-works">How it works<a class="anchor" href="#how-it-works" aria-label="Link to this section">#</a></h2>
+<pre><code>Xcode SDK headers ──libclang (Xcode toolchain, dart:ffi)──▶ Native IR (apple) ──▶ Dart over package:objective_c
+</code></pre>
+<ol>
+<li><strong>Discovery</strong>: <code>xcode-select -p</code>, <code>xcrun --sdk iphonesimulator|iphoneos --show-sdk-path/--show-sdk-version</code>, <code>xcodebuild -version</code>. Nothing is downloaded or copied.</li>
+<li><strong>Extraction</strong> (<code>packages/native_api_ios</code>): framework umbrella headers are parsed with libclang's stable C API, loaded from <code>XcodeDefault.xctoolchain/usr/lib/libclang.dylib</code>. Extracted: classes, protocols, categories (merged into their class), methods and selectors, properties (readonly, class, custom getters such as <code>isHidden</code>), designated <code>init</code> families, <code>NS_ENUM</code>/<code>NS_OPTIONS</code> values (exact, including 64-bit unsigned), structs, nullability (including <code>NS_ASSUME_NONNULL</code> and macro-qualified types), and per-platform availability (<code>introduced</code>/<code>deprecated</code>/<code>obsoleted</code>/<code>unavailable</code>).</li>
+<li><strong>Planning</strong> (<code>packages/native_api_flutter_ios</code>): decides per member what the target can express; everything skipped carries a diagnostic code (see below).</li>
+<li><strong>Emission</strong>: one Dart library per framework (<code>apple/uikit.dart</code>, …), typed <code>objc_msgSend</code> trampolines (<code>apple/_msgsend.dart</code>, one per native signature, with the x86_64 <code>stret</code>/<code>fpret</code> variants), runtime helpers (<code>apple/_runtime.dart</code>) and an umbrella <code>apple.dart</code>. Classes and protocols become Dart extension types over <code>objc.ObjCObject</code>; types that <code>package:objective_c</code> already provides (<code>NSString</code>, <code>NSArray</code>, <code>NSObject</code>, <code>NSError</code>, …) are referenced, not regenerated.</li>
+</ol>
+<h2 id="configuration">Configuration<a class="anchor" href="#configuration" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-yaml">platform:
+  ios:
+    sdk: auto            # iphonesimulator (default) or iphoneos
+    minVersion: &quot;15.0&quot;   # the app's deployment target; newer APIs are guarded
+    frameworks: [Foundation, UIKit]   # headers to parse
+    include: []          # frameworks to generate entirely
+    classes: [UIDevice, UIView, UIViewController]
+    entries: []          # dependency-aware roots
+    depth: 1
+output:
+  dir: lib/src/generated
+</code></pre>
+<pre><code class="language-sh">native-api-bindgen generate ios                    # from configuration
+native-api-bindgen generate ios --class UIKit.UIDevice --depth 0
+native-api-bindgen generate ios --framework UIKit  # a whole framework
+native-api-bindgen inspect ios                     # SDK version + frameworks with public headers
+native-api-bindgen inspect UIDevice#systemName     # IR of a generated symbol
+native-api-bindgen coverage --target ios           # android | ios | ios-rn | ios-swift | all
+native-api-bindgen why-skipped UIKit.UIView#-…     # reason codes for a skipped member
+native-api-bindgen diff ios --from ir-ios-26.4.json --to current  # snapshots are written by generate ios
+native-api-bindgen update                          # regenerates every configured Android and iOS target
+</code></pre>
+<p>The app needs <code>objective_c</code> (^9.5) and <code>ffi</code> (^2.1) as dependencies. Android and iOS output can share <code>output.dir</code>: each target keeps its own manifest (<code>.native_api_bindgen_manifest</code>, <code>.native_api_bindgen_manifest_ios</code>), so neither run deletes the other's files.</p>
+<h2 id="mapping">Mapping<a class="anchor" href="#mapping" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Objective-C</th>
+<th>Dart</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>class / protocol</td>
+<td><code>extension type X._(objc.ObjCObject)</code> with <code>X.as</code>, <code>X.fromPointer</code>, <code>X.isA</code> (classes) / <code>X.conformsTo</code> (protocols)</td>
+</tr>
+<tr>
+<td><code>+alloc</code>, <code>+new</code>, <code>-init…</code></td>
+<td><code>X.alloc()</code>, <code>X.new$()</code>, <code>x.initWith…()</code>; ARC ownership follows the method family (<code>alloc</code>/<code>new</code>/<code>copy</code>/<code>mutableCopy</code>/<code>init</code> return owned references)</td>
+</tr>
+<tr>
+<td><code>@property</code></td>
+<td>getter / setter (class properties are <code>static</code>)</td>
+</tr>
+<tr>
+<td>selector keywords after the first</td>
+<td>named parameters (<code>addItem(item, atIndex: 2)</code>)</td>
+</tr>
+<tr>
+<td><code>nullable</code></td>
+<td><code>T?</code> (<code>nil</code> ⇄ <code>null</code>)</td>
+</tr>
+<tr>
+<td><code>NS_ENUM</code> / <code>NS_OPTIONS</code></td>
+<td><code>abstract final class</code> of <code>int</code> constants; values are <code>int</code></td>
+</tr>
+<tr>
+<td>struct (<code>CGRect</code>, …)</td>
+<td><code>ffi.Struct</code> subclass, passed and returned by value</td>
+</tr>
+<tr>
+<td><code>NSError **</code> (last parameter)</td>
+<td>hidden; a <code>NO</code>/<code>nil</code> result with an error set throws <code>NativeObjCError(domain, code, description)</code></td>
+</tr>
+<tr>
+<td>API newer than <code>minVersion</code></td>
+<td>runtime guard: throws <code>objc.OsVersionError</code> on older iOS</td>
+</tr>
+<tr>
+<td>deprecated API</td>
+<td><code>@Deprecated</code> with the iOS version</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="threading-main-actor">Threading (main actor)<a class="anchor" href="#threading-main-actor" aria-label="Link to this section">#</a></h2>
+<p>The extractor reads Swift concurrency annotations from the headers, the way Swift's importer does (<code>-D__SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS</code>): <code>NS_SWIFT_UI_ACTOR</code> / <code>NS_SWIFT_MAIN_ACTOR</code> on a class, protocol, category or member marks it <code>mainThread</code>; <code>NS_SWIFT_NONISOLATED</code> opts a member out (<code>anyThread</code>). libclang does not expose <code>swift_attr</code>, so the attribute's expansion site in the header is read.</p>
+<ul>
+<li>Flutter: main-actor members document it and check it with <code>assert(rt.checkMainThread(...))</code>, which throws <code>NativeThreadingError</code> (E013) off the main thread in debug builds and costs nothing in release. On iOS the root isolate runs on the main thread; background isolates may call nonisolated APIs (e.g. Foundation).</li>
+<li>React Native: main-actor members (and <code>+alloc</code>/<code>+new</code> of main-actor classes) are invoked on the main thread; everything else runs on the calling JS thread. This replaces the earlier rule &quot;all of UIKit on the main thread&quot; (<code>RnObjCOptions.mainThreadModules</code> remains as an override).</li>
+<li>Measured (iOS 27.0 SDK, Foundation + UIKit): 559 of 1,527 types and 6,708 of 12,886 methods are main-actor isolated, 39 methods are nonisolated; React Native dispatches 6,789 of 12,706 member rows to the main thread.</li>
+</ul>
+<h2 id="blocks">Blocks<a class="anchor" href="#blocks" aria-label="Link to this section">#</a></h2>
+<p>Block parameters are generated as JavaScript/Dart functions; <code>NS_NOESCAPE</code> is read from the headers.</p>
+<ul>
+<li><strong>Flutter</strong> (pure Dart, no native code): <code>NS_NOESCAPE</code> blocks are synchronous closure blocks (any argument and result types; they run while Dart is inside the call). Escaping blocks that return <code>void</code> and take only primitives are <code>NativeCallable.listener</code> blocks: callable from any thread, delivered asynchronously to the isolate (a completion handler's callable is closed after its first call). Escaping blocks with object arguments or a result would need a native trampoline (they may run later or on another thread) and stay <code>E004</code>. Note: escaping blocks that UIKit calls <em>during</em> the call (e.g. <code>animations:</code>) are delivered after the call returns. A <code>void</code> method whose last parameter is a completion block also gets <code>fooAsync(...)</code> returning a <code>Future</code> (a trailing <code>NSError</code> argument fails it with <code>NativeObjCError</code>).</li>
+<li><strong>React Native</strong>: the generated <code>cpp/generated/NabBlocksObjC.mm</code> has one block factory per native signature (<code>B&lt;key&gt;;</code> conversion codes). A block invoked on the JS thread calls the function synchronously; elsewhere a <code>void</code> block posts the call to the JS thread with its arguments retained, so object arguments are supported. Blocks returning a value are bound only when they are <code>NS_NOESCAPE</code> on members that run on the JS thread (no Promise variant). After regenerating, run <code>pod install</code> when files were added (<code>tools/run_rn_ios_tests.sh</code> does this).</li>
+<li>Measured (iOS 27.0 SDK, Foundation + UIKit): Flutter binds 141 block parameters (11 synchronous and 5 listener signatures), <code>E004</code> exclusions 584 → 394, generated methods 10,900 → 11,092; React Native binds 270 block parameters (16 signatures), bindings 15,401 → 15,653. Both full outputs analyze / type-check and compile cleanly.</li>
+</ul>
+<h2 id="implementing-protocols">Implementing protocols<a class="anchor" href="#implementing-protocols" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>React Native</strong>: <code>Proto.implement({...})</code> creates an object adopting the protocol (a runtime subclass of <code>NabJSProtocolObject</code> per protocol set, <code>class_addProtocol</code>); calls arrive through <code>forwardInvocation:</code> using the protocol's method signatures, so no per-signature code is generated. Methods are optional; <code>respondsToSelector:</code> reflects which ones were given. On the JS thread a method runs synchronously; elsewhere <code>void</code> methods are posted to the JS thread, and methods returning a value make the calling thread wait for JS (unless JS is itself waiting for the main thread, then nil/0 is returned and logged). Methods with block or <code>NSError **</code> parameters are not implementable. iOS 27.0 SDK, Foundation + UIKit: 192 protocols, 1,393 methods.</li>
+<li><strong>Flutter</strong>: not supported yet (<code>E004</code>). <code>package:objective_c</code>'s protocol builder needs per-signature native trampolines, and delegate methods are called later from the run loop, where a pure-Dart FFI callback is not valid.</li>
+</ul>
+<h2 id="swift-only-apis-layer-2-generated-objc-adapters">Swift-only APIs (Layer 2: generated <code>@objc</code> adapters)<a class="anchor" href="#swift-only-apis-layer-2-generated-objc-adapters" aria-label="Link to this section">#</a></h2>
+<p>Swift APIs that are not visible to Objective-C are discovered with the official toolchain and wrapped:</p>
+<ol>
+<li><code>xcrun swiftc -emit-module</code> (for a module built from sources) and <code>xcrun swift-symbolgraph-extract</code> produce the module's public symbol graph (kept in a temporary directory, never written to the project).</li>
+<li>For the Objective-C-representable subset (classes and structs; <code>Int</code>, <code>UInt</code>, <code>Double</code>, <code>Float</code>, <code>Bool</code>, <code>String</code>, <code>Date</code>, <code>Data</code>, <code>URL</code>, other adapted types, optionals of object types), <code>&lt;Module&gt;Adapters.swift</code> defines <code>@objc(&lt;Module&gt;_&lt;Type&gt;)</code> classes with explicit selectors that wrap the Swift value (<code>wrapped</code>), plus <code>NativeApiSwiftAdapters.podspec</code>.</li>
+<li>A matching Objective-C interface is fed through the same libclang pipeline as the SDK headers, so the Dart bindings (<code>apple/swiftadapters.dart</code>) come from the regular emitter.</li>
+</ol>
+<pre><code class="language-yaml">platform:
+  ios:
+    swift:
+      adaptersDir: ios/NativeApiSwiftAdapters   # add: pod 'NativeApiSwiftAdapters', :path =&gt; 'NativeApiSwiftAdapters'
+      modules:
+        - name: NABSwiftFixtures                  # a pod of the same name provides the module
+          sources: [../../../fixtures/swift/basic/NABSwiftFixtures.swift]
+        - name: WeatherKit                        # SDK module: no sources
+          types: [Weather]
+</code></pre>
+<p>Selectors: the first argument label is appended to the base name (<code>increment(by:)</code> → <code>incrementBy:</code>, <code>init(start:label:)</code> → <code>initWithStart:label:</code>). APIs newer than <code>minVersion</code> carry <code>@available</code> / <code>API_AVAILABLE</code>.</p>
+<p>Bridged beyond plain values:</p>
+<ul>
+<li><strong>Collections</strong>: <code>[T]</code> and <code>[String: T]</code> of bridged or adapted non-optional types cross as <code>NSArray</code> / <code>NSDictionary</code> (adapted elements are wrapped/unwrapped element by element).</li>
+<li><strong>Raw-value enums</strong> (<code>Int</code> or <code>String</code>): values cross as the raw value; <code>&lt;Module&gt;_&lt;Enum&gt;</code> has one class property per case (<code>NABSwiftFixtures_Level.high</code>). An invalid raw value passed in traps with a clear message.</li>
+<li><strong><code>throws</code></strong>: methods returning <code>Void</code> or a non-optional object, and throwing initializers, bridge to <code>NSError **</code> (<code>checkLimit:error:</code> → <code>NativeObjCError</code> in Dart / <code>NativeObjCError</code> in JS). Throwing members returning scalars or optionals are not representable (<code>E002</code>).</li>
+<li><strong><code>async</code></strong>: <code>foo(...) async [throws] -&gt; R</code> becomes <code>fooCompletion:</code> with a completion handler run from a <code>Task</code> (<code>(R) -&gt; Void</code>, or <code>(R?, Error?) -&gt; Void</code> when throwing). Flutter gets a <code>Future</code> form for primitive results (listener block); results with objects or errors are delivered on React Native.</li>
+</ul>
+<p>Not adapted (with reasons): closures (<code>E004</code>), generics (<code>E003</code>), tuples, nested or optional-element collections, enums without raw values, protocols, failable initializers, async initializers/properties, members colliding with <code>NSObject</code> (<code>E002</code>), iOS-unavailable APIs (<code>E012</code>). Adapters copy values, so object identity is not preserved across calls; <code>alloc()</code> must be followed by one of the adapter's <code>init…</code> methods.</p>
+<p>Measured with Xcode 27.0 (<code>packages/native_api_ios/tool/swift_sdk_report.dart</code>, deployment target 18.0): of the members of three Swift-only SDK modules (enum cases now counted as members), 8 of 111 (TipKit), 73 of 3,466 (Charts) and 183 of 615 (WeatherKit; before this change 89 of 446) are adaptable; the generated adapters for all three type-check with zero errors. The synthetic fixture (<code>fixtures/swift/basic</code>) runs on the iPhone 17 / iOS 26.4 simulator (4 integration tests in <code>examples/flutter/ios_slice</code>).</p>
+<h2 id="not-supported-yet-with-codes">Not supported yet (with codes)<a class="anchor" href="#not-supported-yet-with-codes" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Construct</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blocks (completion handlers)</td>
+<td><code>E004</code></td>
+</tr>
+<tr>
+<td>Implementing protocols in Dart (delegates)</td>
+<td><code>E004</code> (info: protocols are usable for typing and calls)</td>
+</tr>
+<tr>
+<td>Variadic methods, <code>SEL</code>, <code>Class</code> parameters, C arrays, bit-field structs</td>
+<td><code>E002</code></td>
+</tr>
+<tr>
+<td>Raw C pointers (<code>void *</code>)</td>
+<td>exposed as <code>ffi.Pointer</code> (<code>E002</code> info, partial)</td>
+</tr>
+<tr>
+<td>Types outside the generation closure</td>
+<td>exposed as <code>objc.ObjCObject</code> (<code>E016</code> info)</td>
+</tr>
+<tr>
+<td><code>_</code>-prefixed (private) selectors</td>
+<td><code>E005</code></td>
+</tr>
+<tr>
+<td><code>API_UNAVAILABLE(ios)</code></td>
+<td><code>E012</code></td>
+</tr>
+<tr>
+<td>Swift-only APIs outside the adaptable subset</td>
+<td>see &quot;Swift-only APIs&quot; above</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="tested-2026-10-05-maintainer-machine">Tested (2026-10-05, maintainer machine)<a class="anchor" href="#tested-2026-10-05-maintainer-machine" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>
+<p>React Native 0.87.1 (<code>examples/react-native/slice</code>, release build with bundled JS): <strong>12/12 self-tests passing</strong> on the same iPhone 17 / iOS 26.4 simulator (<code>tools/run_rn_ios_tests.sh</code>). All of Foundation + UIKit as React Native bindings: 15,401 bound members, TypeScript type-checks with zero errors, C++ tables compile with <code>-Werror</code>.</p>
+</li>
+<li>
+<p>Xcode 27.0, iPhoneSimulator SDK 27.0; <code>examples/flutter/ios_slice</code> integration tests: <strong>12/12 passing</strong> on an iPhone 17 simulator running iOS 26.4 (<code>flutter test integration_test -d &lt;udid&gt;</code>). The availability-guard test calls an iOS 27.0 API on the iOS 26.4 runtime and expects <code>OsVersionError</code>.</p>
+</li>
+<li>
+<p>Foundation + UIKit generated entirely: 1,527 types, 14,362 bound members, extraction + emission ≈ 0.5–0.6 s, <code>dart analyze</code>: 0 issues (<code>packages/native_api_flutter_ios/tool/gen_sdk.dart</code>). Only the example's APIs are runtime-tested.</p>
+</li>
+<li>
+<p>Fixture IR snapshot, golden Dart output, determinism, traceability and <code>dart analyze --fatal-infos</code> on goldens: <code>packages/native_api_ios/test</code>, <code>packages/native_api_flutter_ios/test</code> (macOS + Xcode only; skipped elsewhere).</p>
+</li>
+</ul>
+<p>Legal policy: <code>docs/legal/apple.md</code>.</p>
+    <div class="doc-foot"><span>Source: <code>docs/ios/README.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="../android/index.html"><small>Previous</small>Android support</a><a class="next" href="../native-ui.html"><small>Next</small>Native UI integration layer</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="../getting-started/index.html">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="../react-native/index.html">React Native</a></li>
+<li><a href="../android/index.html">Android support</a></li>
+<li><a href="index.html" aria-current="page">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="../compatibility/matrix.html">Compatibility matrix</a></li>
+<li><a href="../benchmarks/index.html">Benchmarks</a></li>
+<li><a href="../benchmarks/performance.html">Performance</a></li>
+<li><a href="../benchmarks/size.html">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="../legal/license-policy.html">License policy</a></li>
+<li><a href="../legal/source-provenance.html">Source provenance</a></li>
+<li><a href="../legal/android.html">Android legal / attribution policy</a></li>
+<li><a href="../legal/apple.html">Apple SDK policy</a></li>
+<li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
+<li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#configuration">Configuration</a></li>
+      <li><a href="#mapping">Mapping</a></li>
+      <li><a href="#threading-main-actor">Threading (main actor)</a></li>
+      <li><a href="#blocks">Blocks</a></li>
+      <li><a href="#implementing-protocols">Implementing protocols</a></li>
+      <li><a href="#swift-only-apis-layer-2-generated-objc-adapters">Swift-only APIs (Layer 2: generated @objc adapters)</a></li>
+      <li><a href="#not-supported-yet-with-codes">Not supported yet (with codes)</a></li>
+      <li><a href="#tested-2026-10-05-maintainer-machine">Tested (2026-10-05, maintainer machine)</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

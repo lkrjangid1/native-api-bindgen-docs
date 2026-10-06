@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React Native · native-api-bindgen docs</title>
+  <meta name="description" content="Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo…">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="React Native · native-api-bindgen docs">
+  <meta property="og:description" content="Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo…">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"React Native","description":"Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo…","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Guides</nav>
+    <h1>React Native</h1>
+<blockquote>
+<p>Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo Module.</p>
+</blockquote>
+<p><code>native-api-bindgen generate react-native</code> writes a self-contained bindings library (default <code>native-api-bindings/</code>) into your app for every configured platform (<code>react-native-android</code> / <code>react-native-ios</code> select one). iOS generation needs macOS with Xcode; elsewhere it is skipped with a warning.</p>
+<h2 id="android">Android<a class="anchor" href="#android" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/generated/&lt;package&gt;.ts</code> (+ <code>index.ts</code>)</td>
+<td>one TypeScript module per Java package, one class per Java type (constructors as <code>X.new…()</code>, static/instance methods, <code>…Async()</code> Promise variants, constants, fields, <code>X.implement({...})</code> for interfaces)</td>
+</tr>
+<tr>
+<td><code>cpp/generated/NabBindings.cpp</code></td>
+<td>constant member tables (Java name + JNI descriptor) — no per-API C++ code</td>
+</tr>
+<tr>
+<td><code>cpp/runtime/</code>, <code>src/runtime.ts</code>, <code>android/java/…</code></td>
+<td>the runtime (copied, Apache-2.0)</td>
+</tr>
+<tr>
+<td><code>specs/NativeApiBindgen.ts</code></td>
+<td>Codegen spec of the single pure C++ Turbo Module that installs <code>global.__nab</code></td>
+</tr>
+<tr>
+<td><code>native-api-bindings.cmake</code>, <code>android/proguard-rules.pro</code></td>
+<td>build integration</td>
+</tr>
+</tbody>
+</table></div>
+<p>One-time app integration is described in the generated <code>README.md</code> (codegenConfig, CMake + <code>OnLoad.cpp</code> per reactnative.dev &quot;pure C++ modules&quot;, Gradle source set, <code>NabContext.init(this)</code>). <code>examples/react-native/slice</code> is a complete working app.</p>
+<h2 id="usage">Usage<a class="anchor" href="#usage" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-ts">import {Intent, Uri, Handler, Looper, Runnable, applicationContext, currentActivity} from './native-api-bindings';
+
+applicationContext().getPackageName();                      // sync JSI → JNI call
+const intent = Intent.new$String$Uri(Intent.ACTION_VIEW, Uri.parse('https://example.com'));
+currentActivity()?.startActivity(intent);
+
+const uri = await Uri.parseAsync('content://x/y');           // JNI call on a background thread
+
+Handler.new$Looper(Looper.getMainLooper()!)                  // callbacks from Java threads
+  .post(Runnable.implement({run: () =&gt; console.log('ran')}, {async: ['run']}));
+</code></pre>
+<h2 id="semantics">Semantics<a class="anchor" href="#semantics" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Types</strong> (<code>generation.typescriptMode</code>): <code>strict-typescript</code> (default) maps Java <code>long</code> to <code>bigint</code>; <code>ergonomic-typescript</code> maps it to <code>number</code> and flags constants beyond ±2^53 (<code>E011</code>). <code>String</code> ↔ <code>string</code>, primitive arrays ↔ <code>number[]</code>/<code>boolean[]</code> (copied), object arrays ↔ arrays of wrappers.</li>
+<li><strong>Nominal typing</strong>: parameters typed as a Java class/interface accept any wrapper whose Java type is that class or a subtype (brand types). Use <code>obj.as(Cls)</code> for checked casts and <code>obj.isInstanceOf(Cls)</code>.</li>
+<li><strong>Objects</strong>: each wrapper owns a JNI global reference held by a JSI HostObject — released when JS garbage-collects it or explicitly via <code>release()</code>/<code>dispose()</code>. Use after release throws <code>UseAfterReleaseError</code>.</li>
+<li><strong>Errors</strong>: Java exceptions throw <code>NativeJavaError</code> (<code>nativeClassName</code>, <code>javaStackTrace</code>); SDK-declared non-null results that are null throw <code>NativeNullError</code>; APIs newer than <code>minApi</code> are guarded (<code>NativeApiUnavailableError</code>, <code>E012</code>).</li>
+<li><strong>Callbacks</strong>: on the JS thread they run synchronously. From other Java threads, <code>void</code> methods listed in <code>options.async</code> return to Java immediately; other calls block the Java thread until JS answers (deadlocks if JS is itself blocked waiting on that thread). A throwing <code>void</code> callback is reported (<code>NativeCallbacks.onError</code>, <code>ErrorUtils</code>) and does not crash; non-void callbacks propagate as a Java <code>RuntimeException</code>.</li>
+<li><strong>Context/Activity</strong>: <code>NabContext.init(application)</code> (public SDK APIs only) backs <code>applicationContext()</code>/<code>currentActivity()</code>.</li>
+</ul>
+<h2 id="ios">iOS<a class="anchor" href="#ios" aria-label="Link to this section">#</a></h2>
+<p><code>generate react-native-ios</code> adds to the same library:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/generated/apple/&lt;module&gt;.ts</code>, <code>ios.ts</code></td>
+<td>one TypeScript class per Objective-C class/protocol (<code>X.alloc()</code>, <code>X.new$()</code>, <code>init…</code> methods, properties as accessors, <code>…Async()</code> Promise variants, <code>X.isA()</code> / <code>P.conformsTo()</code>), interfaces for structs, <code>as const</code> objects for enums</td>
+</tr>
+<tr>
+<td><code>cpp/generated/NabBindingsObjC.cpp</code></td>
+<td>member tables: selector + JS conversion codes + flags, struct field names</td>
+</tr>
+<tr>
+<td><code>cpp/runtime-objc/</code>, <code>src/runtime-objc.ts</code></td>
+<td>the Objective-C++ runtime (copied, Apache-2.0)</td>
+</tr>
+<tr>
+<td><code>NativeApiBindings.podspec</code></td>
+<td>CocoaPods integration (links the configured frameworks)</td>
+</tr>
+</tbody>
+</table></div>
+<p>One-time app integration: <code>pod 'NativeApiBindings', :path =&gt; '../native-api-bindings'</code> in <code>ios/Podfile</code>, and <code>&quot;ios&quot;: {&quot;modulesProvider&quot;: {&quot;NativeApiBindgen&quot;: &quot;NabModuleProvider&quot;}}</code> in <code>package.json</code> <code>codegenConfig</code>. Import from <code>'&lt;library&gt;/ios'</code>.</p>
+<pre><code class="language-ts">import {UIDevice, UIView, NSFileManager, isNativeObjCError} from './native-api-bindings/ios';
+
+UIDevice.currentDevice.systemName;                           // 'iOS' — UIKit call, run on the main thread
+const view = UIView.alloc().initWithFrame({origin: {x: 0, y: 0}, size: {width: 10, height: 10}});
+view.tag = 42n;                                              // NSInteger is bigint in strict-typescript
+await NSFileManager.defaultManager.fileExistsAtPathAsync('/'); // Foundation call on a background queue
+try {
+  NSFileManager.defaultManager.contentsOfDirectoryAtPath('/missing');
+} catch (e) {
+  if (isNativeObjCError(e)) console.log(e.domain, e.code); // NSError ** → NativeObjCError
+}
+</code></pre>
+<ul>
+<li><strong>Calls</strong> go through <code>NSInvocation</code> with the method signature reported by the Objective-C runtime, so argument layouts are never guessed. Members declared in UIKit run on the main thread (synchronously from the JS thread; <code>…Async()</code> variants dispatch asynchronously). Other members run on the calling thread, or a background queue for <code>…Async()</code>.</li>
+<li><strong>Values</strong>: <code>NSString</code> ↔ <code>string</code>; <code>BOOL</code> ↔ <code>boolean</code>; <code>NSInteger</code>/<code>NSUInteger</code>/64-bit enums ↔ <code>bigint</code> (strict) or <code>number</code> (ergonomic); structs ↔ plain objects (also anonymous structs such as <code>NSOperatingSystemVersion</code>); objects ↔ wrapper classes (<code>nil</code> ↔ <code>null</code>).</li>
+<li><strong>Objects</strong>: each wrapper holds a strong reference in a JSI HostObject; the final release is sent to the main thread (UIKit objects must deallocate there). <code>release()</code>/<code>dispose()</code>, <code>UseAfterReleaseError</code>, <code>DoubleReleaseError</code> behave as on Android.</li>
+<li><strong>Errors</strong>: <code>NSError **</code> (last parameter) is hidden and a failure throws <code>NativeObjCError</code> (<code>domain</code>, <code>code</code>); an Objective-C exception throws <code>NativeObjCException</code> (<code>exceptionName</code>, <code>reason</code>); APIs newer than <code>platform.ios.minVersion</code> throw <code>NativeApiUnavailableError</code> (<code>E012</code>).</li>
+<li><strong>Not supported yet</strong>: blocks and implementing protocols in JS (<code>E004</code>), raw C pointers, <code>SEL</code>/<code>Class</code> parameters, structs with non-numeric fields (<code>E002</code>). Class methods are available on the declaring class only.</li>
+</ul>
+<h2 id="size">Size<a class="anchor" href="#size" aria-label="Link to this section">#</a></h2>
+<p>Metro does not tree-shake, so all generated TypeScript ships in the bundle: generate only what you need (<code>entries</code>/<code>depth</code>). Measured numbers: <code>docs/benchmarks/size.md</code>.</p>
+    <div class="doc-foot"><span>Source: <code>docs/react-native/README.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="../flutter/index.html"><small>Previous</small>Flutter / Dart target</a><a class="next" href="../android/index.html"><small>Next</small>Android support</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="../getting-started/index.html">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="index.html" aria-current="page">React Native</a></li>
+<li><a href="../android/index.html">Android support</a></li>
+<li><a href="../ios/index.html">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="../compatibility/matrix.html">Compatibility matrix</a></li>
+<li><a href="../benchmarks/index.html">Benchmarks</a></li>
+<li><a href="../benchmarks/performance.html">Performance</a></li>
+<li><a href="../benchmarks/size.html">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="../legal/license-policy.html">License policy</a></li>
+<li><a href="../legal/source-provenance.html">Source provenance</a></li>
+<li><a href="../legal/android.html">Android legal / attribution policy</a></li>
+<li><a href="../legal/apple.html">Apple SDK policy</a></li>
+<li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
+<li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#android">Android</a></li>
+      <li><a href="#usage">Usage</a></li>
+      <li><a href="#semantics">Semantics</a></li>
+      <li><a href="#ios">iOS</a></li>
+      <li><a href="#size">Size</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

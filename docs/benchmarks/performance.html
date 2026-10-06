@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Performance · native-api-bindgen docs</title>
+  <meta name="description" content="Measured on 2026-10-05 on the maintainer's Apple-silicon Mac. Emulator and simulator numbers are not device numbers; they are useful for relative…">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Performance · native-api-bindgen docs">
+  <meta property="og:description" content="Measured on 2026-10-05 on the maintainer's Apple-silicon Mac. Emulator and simulator numbers are not device numbers; they are useful for relative…">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Performance","description":"Measured on 2026-10-05 on the maintainer's Apple-silicon Mac. Emulator and simulator numbers are not device numbers; they are useful for relative…","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Reference</nav>
+    <h1>Performance</h1>
+<p>Measured on 2026-10-05 on the maintainer's Apple-silicon Mac. <strong>Emulator and simulator numbers are not device numbers</strong>; they are useful for relative comparisons on the same machine only. Each value is the median of three runs (raw runs in the JSON files); per-call values are averages over a timed loop after a warm-up.</p>
+<h2 id="flutter-on-android--profile-mode-api-37-arm64-emulator">Flutter on Android — profile mode, API 37 arm64 emulator<a class="anchor" href="#flutter-on-android--profile-mode-api-37-arm64-emulator" aria-label="Link to this section">#</a></h2>
+<p><code>examples/flutter/android_slice/integration_test/bench_test.dart</code> (<code>flutter drive --profile</code>), JSON: <a href="perf-2026-10-05-flutter-android.json"><code>perf-2026-10-05-flutter-android.json</code></a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Generated binding (JNI)</th>
+<th>Hand-written MethodChannel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instance call returning <code>int</code> (<code>Bundle.size()</code>)</td>
+<td>1.00 µs</td>
+<td>270.7 µs</td>
+</tr>
+<tr>
+<td>Static call returning an object (<code>Uri.parse</code>)</td>
+<td>4.06 µs</td>
+<td>—</td>
+</tr>
+<tr>
+<td>String in + string out (<code>Uri.parse(s).toString()</code>)</td>
+<td>12.50 µs</td>
+<td>279.5 µs</td>
+</tr>
+<tr>
+<td>No-op round trip</td>
+<td>—</td>
+<td>267.2 µs</td>
+</tr>
+<tr>
+<td>Java → Dart callback, synchronous (<code>Handler.dispatchMessage</code> → <code>Handler.Callback</code>)</td>
+<td>130.47 µs</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Handler.post</code> on the main Looper → Dart <code>Runnable</code> runs (median)</td>
+<td>28.0 ms (sync) / 29.2 ms (async)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <code>Handler.post</code> latency is dominated by when the main Looper dispatches the message in this setup (the synchronous and asynchronous callback variants are the same), not by the binding call itself.</p>
+<h2 id="flutter-on-ios--debug-jit-iphone-17-simulator-ios-264">Flutter on iOS — debug (JIT), iPhone 17 simulator, iOS 26.4<a class="anchor" href="#flutter-on-ios--debug-jit-iphone-17-simulator-ios-264" aria-label="Link to this section">#</a></h2>
+<p>Flutter supports profile/release builds only on physical iOS devices, so these are JIT numbers. <code>examples/flutter/ios_slice/integration_test/bench_test.dart</code>, JSON: <a href="perf-2026-10-05-flutter-ios.json"><code>perf-2026-10-05-flutter-ios.json</code></a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Generated binding (<code>objc_msgSend</code>)</th>
+<th>Hand-written MethodChannel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instance getter returning <code>NSInteger</code> (<code>UIView.tag</code>)</td>
+<td>34.4 ns</td>
+<td>20.4 µs</td>
+</tr>
+<tr>
+<td>Class getter returning an object (<code>NSProcessInfo.processInfo</code>)</td>
+<td>197.1 ns</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NSString</code> set + get + convert (<code>UIViewController.title</code>)</td>
+<td>1.08 µs</td>
+<td>19.6 µs (echo)</td>
+</tr>
+<tr>
+<td>Struct by value get + set (<code>UIView.frame</code>)</td>
+<td>117.4 ns</td>
+<td>—</td>
+</tr>
+<tr>
+<td>No-op round trip</td>
+<td>—</td>
+<td>26.0 µs</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="react-native--release-hermes-bytecode">React Native — release (Hermes bytecode)<a class="anchor" href="#react-native--release-hermes-bytecode" aria-label="Link to this section">#</a></h2>
+<p><code>examples/react-native/slice/src/bench.ts</code>, run after the self-tests by <code>tools/run_rn_device_tests.sh</code> / <code>tools/run_rn_ios_tests.sh</code>.</p>
+<p>Android (API 37 arm64 emulator), JSON: <a href="perf-2026-10-05-rn-android.json"><code>perf-2026-10-05-rn-android.json</code></a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Generated binding (JSI → JNI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instance call returning <code>int</code> (<code>Bundle.size()</code>)</td>
+<td>1.50 µs</td>
+</tr>
+<tr>
+<td>Static call returning an object (<code>Uri.parse</code>, then <code>release()</code>)</td>
+<td>4.53 µs</td>
+</tr>
+<tr>
+<td>Call returning a string (<code>Uri.toString()</code>)</td>
+<td>1.88 µs</td>
+</tr>
+<tr>
+<td>Promise variant (<code>Bundle.sizeAsync()</code>), JNI on a worker thread</td>
+<td>424 µs</td>
+</tr>
+</tbody>
+</table></div>
+<p>iOS (iPhone 17 simulator, iOS 26.4), JSON: <a href="perf-2026-10-05-rn-ios.json"><code>perf-2026-10-05-rn-ios.json</code></a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Generated binding (JSI → Objective-C++ → <code>NSInvocation</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Foundation getter returning <code>NSUInteger</code> (<code>activeProcessorCount</code>, JS thread)</td>
+<td>1.14 µs</td>
+</tr>
+<tr>
+<td>Class getter returning an object (<code>NSProcessInfo.processInfo</code>, then <code>release()</code>)</td>
+<td>2.33 µs</td>
+</tr>
+<tr>
+<td>Getter returning a string (<code>processName</code>)</td>
+<td>0.90 µs</td>
+</tr>
+<tr>
+<td>UIKit getter (<code>UIView.tag</code>, synchronous hop to the main thread)</td>
+<td>9.98 µs</td>
+</tr>
+<tr>
+<td>UIKit struct get + set (<code>UIView.frame</code>, two main-thread hops)</td>
+<td>20.68 µs</td>
+</tr>
+<tr>
+<td>Promise variant (<code>NSFileManager.fileExistsAtPathAsync</code>)</td>
+<td>11 µs</td>
+</tr>
+</tbody>
+</table></div>
+<p>No hand-written React Native module was benchmarked for comparison.</p>
+<h2 id="byte-transfers-trd-36--single-runs">Byte transfers (TRD §36) — single runs<a class="anchor" href="#byte-transfers-trd-36--single-runs" aria-label="Link to this section">#</a></h2>
+<p>JSON: <a href="bytes-2026-10-05.json"><code>bytes-2026-10-05.json</code></a>. Each value is the mean of 10 iterations after one warm-up (a single run, not a median of three).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>1 MB</th>
+<th>16 MB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flutter Android (profile, emulator): <code>Uint8List</code> → <code>byte[]</code> → <code>Arrays.copyOf</code> → <code>Uint8List</code> (<code>byteArrayOf</code> / <code>bytesOf</code>)</td>
+<td>1.80 ms</td>
+<td>32.9 ms</td>
+</tr>
+<tr>
+<td>Same through a hand-written MethodChannel</td>
+<td>9.02 ms</td>
+<td>53.8 ms</td>
+</tr>
+<tr>
+<td>Flutter Android: fill a direct <code>ByteBuffer</code> (<code>directBufferOf</code>, then a zero-copy <code>asUint8List</code> view)</td>
+<td>2.33 ms</td>
+<td>5.99 ms</td>
+</tr>
+<tr>
+<td>Flutter iOS (debug, simulator): <code>nsDataFromBytes</code> (one copy)</td>
+<td>0.076 ms</td>
+<td>2.47 ms</td>
+</tr>
+<tr>
+<td>Flutter iOS: <code>nsDataView</code> (zero-copy view)</td>
+<td>0.0002 ms</td>
+<td>0.0002 ms</td>
+</tr>
+<tr>
+<td>Flutter iOS: <code>NSData.toList()</code> (copy)</td>
+<td>0.21 ms</td>
+<td>2.08 ms</td>
+</tr>
+<tr>
+<td>React Native Android (release, emulator): <code>Uint8Array</code> → <code>byte[]</code> → <code>Arrays.copyOf</code> → <code>Uint8Array</code></td>
+<td>1.61 ms</td>
+<td>30.9 ms</td>
+</tr>
+<tr>
+<td>React Native Android: same with <code>number[]</code> (element by element)</td>
+<td>99.6 ms</td>
+<td>—</td>
+</tr>
+<tr>
+<td>React Native iOS (release, simulator): <code>nsDataFromBytes</code> + <code>bytesFromNSData</code></td>
+<td>0.153 ms</td>
+<td>1.75 ms</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="memory-and-callback-latency-wp7--emulator--simulator">Memory and callback latency (WP7) — emulator / simulator<a class="anchor" href="#memory-and-callback-latency-wp7--emulator--simulator" aria-label="Link to this section">#</a></h2>
+<p>JSON: <a href="perf-2026-10-05-wp7.json"><code>perf-2026-10-05-wp7.json</code></a>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Measurement</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flutter Android (profile): RSS per live generated handle (<code>Bundle</code>), 50k handles after a warm-up, median of 3 runs</td>
+<td>216 bytes (runs: 216, 470, 216)</td>
+</tr>
+<tr>
+<td>Flutter iOS (debug): RSS per live <code>NSOperationQueue</code> handle (Dart wrapper + native object), 50k, 3 runs</td>
+<td>906 / 923 / 930 bytes</td>
+</tr>
+<tr>
+<td>React Native Android (release): PSS per live <code>Bundle</code> handle, 10k handles, single run</td>
+<td>46 bytes</td>
+</tr>
+<tr>
+<td>React Native Android: <code>Handler.post</code> → JS <code>Runnable</code> (async callback), median of 200, single run</td>
+<td>125 µs</td>
+</tr>
+<tr>
+<td>React Native iOS (release): <code>NSOperationQueue</code> block (background thread) → JS, median of 200, single run</td>
+<td>13 µs</td>
+</tr>
+</tbody>
+</table></div>
+<p>Flutter Android's <code>Handler.post</code> → Dart latency (median 46653 µs over the 3 runs) is dominated by when the main Looper runs the posted message during frame work in profile mode, not by the binding call; React Native's JS thread is separate from the main thread, so its posted callbacks arrive faster.</p>
+<h2 id="not-measured-yet">Not measured yet<a class="anchor" href="#not-measured-yet" aria-label="Link to this section">#</a></h2>
+<p>Physical devices (none measured: no consent was given to install on the attached phone); release-mode Flutter on iOS (the simulator supports debug only).</p>
+    <div class="doc-foot"><span>Source: <code>docs/benchmarks/performance.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="index.html"><small>Previous</small>Benchmarks</a><a class="next" href="size.html"><small>Next</small>Binary size</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="../getting-started/index.html">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="../react-native/index.html">React Native</a></li>
+<li><a href="../android/index.html">Android support</a></li>
+<li><a href="../ios/index.html">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="../compatibility/matrix.html">Compatibility matrix</a></li>
+<li><a href="index.html">Benchmarks</a></li>
+<li><a href="performance.html" aria-current="page">Performance</a></li>
+<li><a href="size.html">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="../legal/license-policy.html">License policy</a></li>
+<li><a href="../legal/source-provenance.html">Source provenance</a></li>
+<li><a href="../legal/android.html">Android legal / attribution policy</a></li>
+<li><a href="../legal/apple.html">Apple SDK policy</a></li>
+<li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
+<li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#flutter-on-android--profile-mode-api-37-arm64-emulator">Flutter on Android — profile mode, API 37 arm64 emulator</a></li>
+      <li><a href="#flutter-on-ios--debug-jit-iphone-17-simulator-ios-264">Flutter on iOS — debug (JIT), iPhone 17 simulator, iOS 26.4</a></li>
+      <li><a href="#react-native--release-hermes-bytecode">React Native — release (Hermes bytecode)</a></li>
+      <li><a href="#byte-transfers-trd-36--single-runs">Byte transfers (TRD §36) — single runs</a></li>
+      <li><a href="#memory-and-callback-latency-wp7--emulator--simulator">Memory and callback latency (WP7) — emulator / simulator</a></li>
+      <li><a href="#not-measured-yet">Not measured yet</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Examples — native-api-bindgen</title>
+  <meta name="description" content="Example code for native-api-bindgen in Flutter and React Native on Android and iOS: calls, callbacks, Kotlin coroutines, blocks, Swift APIs and native views.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Examples — native-api-bindgen">
+  <meta property="og:description" content="Example code for native-api-bindgen in Flutter and React Native on Android and iOS: calls, callbacks, Kotlin coroutines, blocks, Swift APIs and native views.">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Examples","description":"Example code for native-api-bindgen in Flutter and React Native on Android and iOS: calls, callbacks, Kotlin coroutines, blocks, Swift APIs and native views.","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="docs.html">Docs</a>
+          <a class="nav-link" href="examples.html" aria-current="page">Examples</a>
+          <a class="nav-link" href="architecture.html">Architecture</a>
+          <a class="nav-link" href="compatibility.html">Compatibility</a>
+          <a class="nav-link" href="faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Examples</p>
+    <h1>Examples</h1>
+    <p class="lead">From the example apps in the repository (<code>examples/flutter/android_slice</code>, <code>examples/flutter/ios_slice</code>, <code>examples/react-native/slice</code>), each with an on-device test suite.</p>
+  </div>
+</section>
+<div class="wrap page-body prose">
+<h2>Flutter on Android</h2>
+<pre><code>final uri = Uri.parse('https://example.com/p?q=1'.toJString())!;
+print(uri.scheme);                           // bean property over getScheme()
+
+final intent = Intent()
+  ..setFlags(Intent$Flag.FLAG_ACTIVITY_NEW_TASK | Intent$Flag.FLAG_ACTIVITY_CLEAR_TOP);
+
+// A Java interface implemented in Dart.
+final handler = Handler.new$Looper(Looper.getMainLooper()!);
+handler.post(Runnable.implement($Runnable(run: () => print('on the main looper'))));
+
+// Kotlin: suspend -> Future, Flow -> Stream.
+final greeting = await greeter.greetLater(20);
+await for (final i in greeter.countTo(3)) print(i);</code></pre>
+
+<h2>Flutter on iOS</h2>
+<pre><code>final device = ios.UIDevice.currentDevice;
+print(device.systemName.toDartString());
+
+try {
+  fileManager.contentsOfDirectoryAtPath('/missing'.toNSString());
+} on ios.NativeObjCError catch (e) {
+  print(e.domain);                          // NSCocoaErrorDomain
+}
+
+// Blocks: completion handler as a Future.
+final finished = await ios.UIView.animateWithDuration$animations$completionAsync(
+    0.2, animations: () {});
+
+// A native view in the widget tree (package native_api_ui).
+NativeView.ios(view: ios.UILabel.new$()..text = 'Hello'.toNSString());</code></pre>
+
+<h2>React Native</h2>
+<pre><code>// Android
+const intent = Intent.new$String$Uri(Intent.ACTION_VIEW, Uri.parse('https://example.com'));
+const copy = Arrays.copyOf(new Uint8Array([1, 2, 3]), 2);   // byte[] as Uint8Array
+const name = await greeter.greetLater(20n);                 // Kotlin suspend -> Promise
+
+// iOS
+const sorted = views.sortedArrayUsingComparator((a, b) =>
+  a!.as(UIView).tag < b!.as(UIView).tag ? -1n : 1n);        // block from JS
+fileManager.delegate = NSFileManagerDelegate.implement({
+  fileManager$shouldRemoveItemAtPath: (manager, path) => false,
+});                                                         // protocol in JS
+
+// Both platforms: show a native view.
+&lt;NativeView view={label} style={{ width: 200, height: 48 }} /&gt;</code></pre>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="./"><img src="icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="getting-started.html">Get started</a>
+        <a href="docs.html">Documentation</a>
+        <a href="examples.html">Examples</a>
+        <a href="compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="flutter.html">Flutter</a>
+        <a href="react-native.html">React Native</a>
+        <a href="android.html">Android</a>
+        <a href="ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="legal.html">License (Apache-2.0)</a>
+        <a href="legal.html">Legal &amp; source policy</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>

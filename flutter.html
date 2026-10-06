@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flutter — native-api-bindgen</title>
+  <meta name="description" content="Generated Dart bindings for Flutter: Android APIs over package:jni and iOS APIs over package:objective_c, with guards, callbacks and lifetimes.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Flutter — native-api-bindgen">
+  <meta property="og:description" content="Generated Dart bindings for Flutter: Android APIs over package:jni and iOS APIs over package:objective_c, with guards, callbacks and lifetimes.">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Flutter","description":"Generated Dart bindings for Flutter: Android APIs over package:jni and iOS APIs over package:objective_c, with guards, callbacks and lifetimes.","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" data-active="true" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="flutter.html" aria-current="page"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="docs.html">Docs</a>
+          <a class="nav-link" href="examples.html">Examples</a>
+          <a class="nav-link" href="architecture.html">Architecture</a>
+          <a class="nav-link" href="compatibility.html">Compatibility</a>
+          <a class="nav-link" href="faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Framework</p>
+    <h1>Flutter</h1>
+    <p class="lead">Bindings are plain Dart files in your project. They have no registry and do no work at startup, so the AOT compiler removes everything you do not call.</p>
+  </div>
+</section>
+<div class="wrap page-body prose">
+<h2>Android (<code>generate flutter</code>)</h2>
+<ul>
+  <li>Each Java class or interface becomes a Dart extension type over <code>JObject</code>. Constructors are named by their parameters when overloaded (<code>Intent.new$String$Uri</code>), methods keep the Java name for the primary overload.</li>
+  <li>Strings: <code>JString</code> by default (<code>strict-native</code>), or Dart <code>String</code> where lossless (<code>ergonomic-dart</code>).</li>
+  <li>Java interfaces can be implemented in Dart (<code>Runnable.implement(...)</code>). Callbacks from any Java thread work; a throwing <code>void</code> callback is reported, not rethrown into Java.</li>
+  <li>APIs newer than <code>minApi</code> are guarded and throw <code>NativeApiUnavailableException</code> on older devices before touching JNI.</li>
+  <li>Java exceptions surface as <code>NativeJavaException</code> with class name, message and stack trace.</li>
+  <li>Kotlin <code>suspend</code> functions in library jars become <code>Future</code>s.</li>
+  <li>Objects hold JNI references: call <code>release()</code> for deterministic cleanup (otherwise finalizers clean up).</li>
+</ul>
+
+<h2>iOS (<code>generate ios</code>)</h2>
+<ul>
+  <li>Each Objective-C class or protocol becomes a Dart extension type over <code>ObjCObject</code>; Foundation types already provided by <code>package:objective_c</code> (<code>NSString</code>, <code>NSArray</code>, …) are reused.</li>
+  <li>Selectors map to named parameters: <code>addItem(item, atIndex: 2)</code>. Properties are getters and setters.</li>
+  <li>Structs such as <code>CGRect</code> are passed and returned by value. <code>NSError **</code> becomes a thrown <code>NativeObjCError</code>.</li>
+  <li>Swift-only APIs are reachable through generated <code>@objc</code> adapters for the Objective-C-representable subset (<a href="ios.html">iOS</a>).</li>
+</ul>
+
+<h2>Size</h2>
+<p>Release APK of the example with one Android API: 14,842,216 bytes, both when bindings were generated for that API only and for the entire SDK (14,842,216 bytes); the app without bindings: 14,426,402 bytes (+415,814 bytes, mostly <code>package:jni</code>'s native helper).</p>
+
+<h2>Cost per call</h2>
+<p>Measured on an Android emulator in profile mode: about 1.00 µs per generated JNI call versus about 271 µs for a hand-written MethodChannel round trip. On the iOS simulator (debug mode only): about 34 ns per <code>objc_msgSend</code> getter versus 20.4 µs per MethodChannel round trip. Emulator and simulator figures are not device figures.</p>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="./"><img src="icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="getting-started.html">Get started</a>
+        <a href="docs.html">Documentation</a>
+        <a href="examples.html">Examples</a>
+        <a href="compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="flutter.html">Flutter</a>
+        <a href="react-native.html">React Native</a>
+        <a href="android.html">Android</a>
+        <a href="ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="legal.html">License (Apache-2.0)</a>
+        <a href="legal.html">Legal &amp; source policy</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>

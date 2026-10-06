@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apple SDK policy · native-api-bindgen docs</title>
+  <meta name="description" content="Not legal advice. This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Apple SDK policy · native-api-bindgen docs">
+  <meta property="og:description" content="Not legal advice. This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Apple SDK policy","description":"Not legal advice. This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Legal</nav>
+    <h1>Apple SDK policy</h1>
+<blockquote>
+<p><strong>Not legal advice.</strong> This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.</p>
+</blockquote>
+<h2 id="mechanism-as-implemented">Mechanism (as implemented)<a class="anchor" href="#mechanism-as-implemented" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>The SDK is located with <code>xcode-select</code>/<code>xcrun</code>; headers are read <strong>in place</strong> from the locally installed Xcode by the Xcode toolchain's own libclang. Nothing from the SDK is copied into the repository, the generator, or published packages.</li>
+<li>The extractor keeps declarations, symbol names, types, nullability and availability metadata only. Header comments and Apple documentation are <strong>not</strong> copied; generated docs contain the Objective-C signature, availability lines and (optionally) links to developer.apple.com.</li>
+<li>Generated Dart output (<code>apple/*.dart</code>) carries a <code>Source SDK: Apple SDK &lt;version&gt;</code> header and is <strong>local-only by default</strong> (<code>distribution.generatedArtifacts: local-only</code>). <code>audit-license</code> reports such files as <code>generated-sdk-binding</code> (WARN, LEGAL_REVIEW_REQUIRED before redistribution).</li>
+<li>No absolute SDK paths are embedded in IR or generated code (tested).</li>
+<li>Clang AST dumps, precompiled headers and module caches (<code>.pch</code>, <code>.pcm</code>, <code>.ast</code>, JSON AST) are never written to the repository; <code>audit-license</code> blocks them (<code>clang-ast-dump</code>) and <code>.gitignore</code> excludes them.</li>
+</ul>
+<p>We will <strong>not</strong>:</p>
+<ul>
+<li>vendor Apple SDKs or commit any Apple SDK file (headers, <code>.tbd</code>, <code>.framework</code>, <code>.xcframework</code>, binaries) to Git;</li>
+<li>publish Apple framework binaries copied from Xcode;</li>
+<li>copy Apple documentation bodies into generated packages or scrape and republish Apple documentation;</li>
+<li>expose private Apple APIs as supported (E005), or provide guidance on App Store policy evasion.</li>
+</ul>
+<p>We <strong>may</strong>, subject to the Xcode and Apple SDKs Agreement (<a href="https://developer.apple.com/support/terms/" rel="noopener">https://developer.apple.com/support/terms/</a>), generate bindings on the developer's own machine from the SDK installed with their Xcode. Generated output will contain declarations, binding code, symbol names, availability metadata, developer-authored text and links to developer.apple.com.</p>
+<p>Tests use <strong>synthetic</strong> Objective-C headers written for this project, never copies of SDK headers. Automated checks (<code>audit-license</code>) detect Mach-O binaries, framework bundles, Apple copyright banners typical of SDK headers, and Xcode SDK paths, and block them.</p>
+<p>Apple, iOS, iPadOS, macOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. This project is not affiliated with or endorsed by Apple.</p>
+    <div class="doc-foot"><span>Source: <code>docs/legal/apple.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="android.html"><small>Previous</small>Android legal / attribution policy</a><a class="next" href="flutter.html"><small>Next</small>Flutter / Dart policy</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="../getting-started/index.html">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="../react-native/index.html">React Native</a></li>
+<li><a href="../android/index.html">Android support</a></li>
+<li><a href="../ios/index.html">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="../compatibility/matrix.html">Compatibility matrix</a></li>
+<li><a href="../benchmarks/index.html">Benchmarks</a></li>
+<li><a href="../benchmarks/performance.html">Performance</a></li>
+<li><a href="../benchmarks/size.html">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="license-policy.html">License policy</a></li>
+<li><a href="source-provenance.html">Source provenance</a></li>
+<li><a href="android.html">Android legal / attribution policy</a></li>
+<li><a href="apple.html" aria-current="page">Apple SDK policy</a></li>
+<li><a href="flutter.html">Flutter / Dart policy</a></li>
+<li><a href="react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#mechanism-as-implemented">Mechanism (as implemented)</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

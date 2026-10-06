@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compatibility matrix · native-api-bindgen docs</title>
+  <meta name="description" content="Only versions actually exercised are listed. &quot;Tested&quot; means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2…">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Compatibility matrix · native-api-bindgen docs">
+  <meta property="og:description" content="Only versions actually exercised are listed. &quot;Tested&quot; means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2…">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Compatibility matrix","description":"Only versions actually exercised are listed. \"Tested\" means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2…","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="../../flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="../../react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="../../android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="../../ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="../../docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="../../examples.html">Examples</a>
+          <a class="nav-link" href="../../architecture.html">Architecture</a>
+          <a class="nav-link" href="../../compatibility.html">Compatibility</a>
+          <a class="nav-link" href="../../faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="../../getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<div class="wrap docs-shell">
+  <article class="doc prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Reference</nav>
+    <h1>Compatibility matrix</h1>
+<p>Only versions <strong>actually exercised</strong> are listed. &quot;Tested&quot; means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2 arm64). CI workflows exist (<code>.github/workflows</code>) but have not run yet because the repository has no remote (<code>tools/ci_local.sh</code> runs the platform-independent steps locally); this table will be generated from CI once they do.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Tested</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dart SDK</td>
+<td>3.11.5</td>
+<td>all package tests; workspace requires ≥ 3.9</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>3.41.9 (stable)</td>
+<td>example app build, widget test, integration tests, release APK builds</td>
+</tr>
+<tr>
+<td><code>package:jni</code> / <code>jni_flutter</code></td>
+<td>1.0.3 / 1.0.3</td>
+<td>generated bindings compile and run (host JVM + Android emulator)</td>
+</tr>
+<tr>
+<td>Android platform parsed (full android.jar)</td>
+<td>36, 37.2</td>
+<td>full-jar extraction; 36 also full Flutter generation + <code>dart analyze</code></td>
+</tr>
+<tr>
+<td>Android platforms in diff</td>
+<td>35 → 36</td>
+<td><code>diff android</code></td>
+</tr>
+<tr>
+<td>Android device (emulator)</td>
+<td>API 37 (<code>Pixel_7</code> AVD, arm64)</td>
+<td>19 Flutter integration tests (incl. native view, Flow, typed constants, bytes)</td>
+</tr>
+<tr>
+<td>Generated <code>minApi</code> guards</td>
+<td>24</td>
+<td>guard tests (device + host JVM)</td>
+</tr>
+<tr>
+<td>Minor SDK versions</td>
+<td>36.1 availability (fixture), <code>SDK_INT_FULL</code> path</td>
+<td>unit + host-JVM tests</td>
+</tr>
+<tr>
+<td>JDK</td>
+<td>OpenJDK 25.0.2 (fixtures compiled with <code>--release 17</code>)</td>
+<td>fixture, golden, host-JVM runtime tests</td>
+</tr>
+<tr>
+<td>CMake (host JNI helper)</td>
+<td>3.22.1 (from Android SDK)</td>
+<td><code>tools/run_jvm_runtime_tests.sh</code></td>
+</tr>
+<tr>
+<td>Xcode / iOS SDK</td>
+<td>27.0 / iPhoneSimulator 27.0</td>
+<td>libclang extraction; Foundation + UIKit full generation + <code>dart analyze</code></td>
+</tr>
+<tr>
+<td>iOS runtime (simulator)</td>
+<td>26.4 (iPhone 17)</td>
+<td>22 Flutter integration tests (<code>examples/flutter/ios_slice</code>, deployment target 15.0; incl. blocks, main-actor check, native view, Swift adapters). iOS 27.0 simulators: React Native template apps without UIScene adoption do not launch (not a binding issue)</td>
+</tr>
+<tr>
+<td><code>package:objective_c</code></td>
+<td>9.5.0</td>
+<td>generated iOS bindings compile and run</td>
+</tr>
+<tr>
+<td>Kotlin (fixture library)</td>
+<td>Kotlin 2.4.20, kotlinx-coroutines 1.10.2, Gradle 9.6.0</td>
+<td>suspend, <code>Flow</code>, <code>kotlin.Metadata</code>: 32 host-JVM tests (<code>tools/run_jvm_runtime_tests.sh</code>, incl. Java fixtures), 3 Flutter integration tests and React Native suspend → Promise on the API 37 emulator; metadata decoding validated on kotlin-stdlib 2.4.20 and kotlinx-coroutines-core 1.10.2</td>
+</tr>
+<tr>
+<td>Swift (Layer 2 adapters)</td>
+<td>Swift 6.4 (Xcode 27.0), CocoaPods 1.16.2</td>
+<td>fixture adapters (incl. collections, raw-value enums, throws, async): 6 unit/golden tests + 4 Flutter integration tests on the iOS 26.4 simulator; WeatherKit/TipKit/Charts adapters type-check</td>
+</tr>
+<tr>
+<td>React Native on iOS</td>
+<td>0.87.1 (New Architecture, Hermes), CocoaPods 1.16.2</td>
+<td>release build for the iOS 26.4 simulator; 16 self-tests (<code>tools/run_rn_ios_tests.sh</code>; incl. blocks, protocols in JS, NSData, native view)</td>
+</tr>
+<tr>
+<td>React Native on Android</td>
+<td>0.87.1 (New Architecture, Hermes)</td>
+<td>RN example release build (R8); 17 self-tests on the API 37 emulator (incl. suspend → Promise, <code>Uint8Array</code>, native view); Jest runtime tests</td>
+</tr>
+<tr>
+<td><code>native_api_ui</code> (Flutter plugin)</td>
+<td>0.1.0-dev.1</td>
+<td>native views on the Android emulator and iOS simulator</td>
+</tr>
+<tr>
+<td>Node / TypeScript</td>
+<td>25.9.0 / 6.0.3</td>
+<td><code>tsc --strict</code> on generated output (fixtures, slice, full android-36 SDK)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="known-constraints">Known constraints<a class="anchor" href="#known-constraints" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><code>package:jni</code> ≥ 1.0 is required (generated code uses its extension-type API and <code>JImplementer</code>).</li>
+<li>Android platforms must include <code>data/api-versions.xml</code> for availability and non-SDK detection (all platforms tested do).</li>
+<li>Physical devices: not tested (no consent was given to install on the attached Android phone; no iOS device available).</li>
+</ul>
+    <div class="doc-foot"><span>Source: <code>docs/compatibility/matrix.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="../versioning.html"><small>Previous</small>Versioning</a><a class="next" href="../benchmarks/index.html"><small>Next</small>Benchmarks</a></nav>
+  </article>
+  <aside class="docs-side" aria-label="Documentation">
+<a class="side-home" href="../../docs.html">Overview</a>
+<p class="side-group">Guides</p>
+<ul>
+<li><a href="../getting-started/index.html">Getting started (Flutter on Android)</a></li>
+<li><a href="../flutter/index.html">Flutter / Dart target</a></li>
+<li><a href="../react-native/index.html">React Native</a></li>
+<li><a href="../android/index.html">Android support</a></li>
+<li><a href="../ios/index.html">iOS / Apple (Flutter)</a></li>
+<li><a href="../native-ui.html">Native UI integration layer</a></li>
+<li><a href="../troubleshooting/index.html">Troubleshooting</a></li>
+</ul>
+<p class="side-group">Architecture</p>
+<ul>
+<li><a href="../architecture/overview.html">Architecture overview</a></li>
+<li><a href="../architecture/ir.html">Native IR</a></li>
+<li><a href="../architecture/type-mapping.html">Type mapping (Flutter / Dart over package:jni)</a></li>
+<li><a href="../architecture/lifecycle.html">Native object lifecycle, callbacks and threading</a></li>
+<li><a href="../architecture/rn-jsi.html">React Native target: TypeScript → JSI → C++ → JNI / Objective-C</a></li>
+<li><a href="../technical-design.html">Technical design</a></li>
+</ul>
+<p class="side-group">Reference</p>
+<ul>
+<li><a href="../error-codes.html">Diagnostic / error codes</a></li>
+<li><a href="../versioning.html">Versioning</a></li>
+<li><a href="matrix.html" aria-current="page">Compatibility matrix</a></li>
+<li><a href="../benchmarks/index.html">Benchmarks</a></li>
+<li><a href="../benchmarks/performance.html">Performance</a></li>
+<li><a href="../benchmarks/size.html">Binary size</a></li>
+<li><a href="../sources/official-sources.html">Official source registry</a></li>
+</ul>
+<p class="side-group">Project</p>
+<ul>
+<li><a href="../roadmap.html">Roadmap</a></li>
+<li><a href="../test-strategy.html">Test strategy</a></li>
+<li><a href="../implementation-plan.html">Implementation plan</a></li>
+</ul>
+<p class="side-group">Legal</p>
+<ul>
+<li><a href="../legal/license-policy.html">License policy</a></li>
+<li><a href="../legal/source-provenance.html">Source provenance</a></li>
+<li><a href="../legal/android.html">Android legal / attribution policy</a></li>
+<li><a href="../legal/apple.html">Apple SDK policy</a></li>
+<li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
+<li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+  </aside>
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#known-constraints">Known constraints</a></li>
+    </ul>
+  </nav>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="../../getting-started.html">Get started</a>
+        <a href="../../docs.html">Documentation</a>
+        <a href="../../examples.html">Examples</a>
+        <a href="../../compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="../../flutter.html">Flutter</a>
+        <a href="../../react-native.html">React Native</a>
+        <a href="../../android.html">Android</a>
+        <a href="../../ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="../../legal.html">License (Apache-2.0)</a>
+        <a href="../../legal.html">Legal &amp; source policy</a>
+        <a href="../../faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="../../site.js" defer></script>
+</body>
+</html>

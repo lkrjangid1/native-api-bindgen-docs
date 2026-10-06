@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compatibility — native-api-bindgen</title>
+  <meta name="description" content="Exactly which SDKs, toolchains, devices and frameworks native-api-bindgen has been tested with, and the measured size and performance results.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Compatibility — native-api-bindgen">
+  <meta property="og:description" content="Exactly which SDKs, toolchains, devices and frameworks native-api-bindgen has been tested with, and the measured size and performance results.">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Compatibility","description":"Exactly which SDKs, toolchains, devices and frameworks native-api-bindgen has been tested with, and the measured size and performance results.","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="docs.html">Docs</a>
+          <a class="nav-link" href="examples.html">Examples</a>
+          <a class="nav-link" href="architecture.html">Architecture</a>
+          <a class="nav-link" href="compatibility.html" aria-current="page">Compatibility</a>
+          <a class="nav-link" href="faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Tested and measured</p>
+    <h1>Compatibility</h1>
+    <p class="lead">Only versions that were actually exercised are listed. Tests ran on 2026-10-05 on one Apple-silicon Mac; continuous integration workflows exist but have not run publicly yet.</p>
+  </div>
+</section>
+<div class="wrap page-body prose">
+<div class="table-wrap"><table>
+  <tr><th>Component</th><th>Tested</th><th>How</th></tr>
+  <tr><td>Dart / Flutter</td><td>3.11.5 / 3.41.9</td><td>package tests; example apps</td></tr>
+  <tr><td>Android platform</td><td>36 (full jar), 37.2 (parsed)</td><td>whole-SDK generation analyzes cleanly</td></tr>
+  <tr><td>Android emulator</td><td>API 37, arm64</td><td>Flutter: 14 integration tests; React Native: 12 self-tests</td></tr>
+  <tr><td>Xcode / iOS SDK</td><td>27.0 / 27.0</td><td>Foundation + UIKit full generation</td></tr>
+  <tr><td>iOS simulator</td><td>iPhone 17, iOS 26.4</td><td>Flutter: 15 integration tests; React Native: 12 self-tests</td></tr>
+  <tr><td>React Native</td><td>0.87.1 (New Architecture, Hermes)</td><td>release builds on both platforms</td></tr>
+  <tr><td>Kotlin</td><td>2.4.20, kotlinx-coroutines 1.10.2</td><td>suspend functions on a host JVM and the emulator</td></tr>
+  <tr><td><code>package:jni</code> / <code>package:objective_c</code></td><td>1.0.3 / 9.5.0</td><td>generated code compiles and runs</td></tr>
+</table></div>
+<h2>Size (release APKs, Android API 36)</h2>
+<div class="table-wrap"><table>
+  <tr><th>App</th><th>Bytes</th></tr>
+  <tr><td>Flutter example without bindings</td><td>14,426,402</td></tr>
+  <tr><td>Flutter, one API; bindings generated for that API</td><td>14,842,216</td></tr>
+  <tr><td>Flutter, one API; bindings generated for the whole SDK</td><td>14,842,216</td></tr>
+  <tr><td>React Native example without bindings</td><td>18,623,666</td></tr>
+  <tr><td>React Native, bindings for the slice</td><td>19,312,390</td></tr>
+  <tr><td>React Native, bindings for the whole SDK</td><td>57,776,278</td></tr>
+</table></div>
+<h2>Cost per call (emulator/simulator)</h2>
+<div class="table-wrap"><table>
+  <tr><th>Path</th><th>Generated binding</th><th>MethodChannel</th></tr>
+  <tr><td>Flutter, Android (profile)</td><td>1.00 µs</td><td>271 µs</td></tr>
+  <tr><td>Flutter, iOS (debug)</td><td>34 ns</td><td>20.4 µs</td></tr>
+  <tr><td>React Native, Android (release)</td><td>1.50 µs</td><td>not measured</td></tr>
+  <tr><td>React Native, iOS (release, JS thread)</td><td>1.14 µs</td><td>not measured</td></tr>
+</table></div>
+<p>Medians of three runs; methods and raw data are in the repository under <code>docs/benchmarks</code>. Physical devices have not been measured.</p>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="./"><img src="icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="getting-started.html">Get started</a>
+        <a href="docs.html">Documentation</a>
+        <a href="examples.html">Examples</a>
+        <a href="compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="flutter.html">Flutter</a>
+        <a href="react-native.html">React Native</a>
+        <a href="android.html">Android</a>
+        <a href="ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="legal.html">License (Apache-2.0)</a>
+        <a href="legal.html">Legal &amp; source policy</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>

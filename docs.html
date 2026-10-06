@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentation — native-api-bindgen</title>
+  <meta name="description" content="The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Documentation — native-api-bindgen">
+  <meta property="og:description" content="The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('nab-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Documentation","description":"The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.","inLanguage":"en"}</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
+      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Main">
+          <div class="dropdown">
+            <button type="button" class="nav-link" aria-haspopup="true">Platforms<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+            <div class="dropdown-panel">
+            <a href="flutter.html"><strong>Flutter</strong><span>Dart over package:jni and package:objective_c</span></a>
+            <a href="react-native.html"><strong>React Native</strong><span>TypeScript over JSI, New Architecture</span></a>
+            <a href="android.html"><strong>Android</strong><span>android.jar, AndroidX, Kotlin</span></a>
+            <a href="ios.html"><strong>iOS</strong><span>Objective-C headers and Swift adapters</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="docs.html" aria-current="page">Docs</a>
+          <a class="nav-link" href="examples.html">Examples</a>
+          <a class="nav-link" href="architecture.html">Architecture</a>
+          <a class="nav-link" href="compatibility.html">Compatibility</a>
+          <a class="nav-link" href="faq.html">FAQ</a>
+        </nav>
+        <div class="bar-actions">
+          <button type="button" class="icon-btn theme-toggle" aria-label="Switch between light and dark theme"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg></button>
+          <a class="btn btn-primary btn-sm" href="getting-started.html">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Documentation</p>
+    <h1>Documentation</h1>
+    <p class="lead">Everything in the repository's <code>docs/</code> directory, published here and versioned with the code. New to the tool? Start with <a href="getting-started.html">Getting started</a>.</p>
+  </div>
+</section>
+<div class="wrap page-body prose">
+<h2 id="guides">Guides</h2>
+<div class="doc-cards">
+<a class="doc-card" href="docs/getting-started/index.html"><strong>Getting started (Flutter on Android)</strong><span>Experimental. Generated bindings are derived from the Android SDK on your machine and are kept local by default.</span></a>
+<a class="doc-card" href="docs/flutter/index.html"><strong>Flutter / Dart target</strong><span>Generated code uses only the officially supported Dart↔Java interop path: package:jni (the runtime used by jnigen)…</span></a>
+<a class="doc-card" href="docs/react-native/index.html"><strong>React Native</strong><span>Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one…</span></a>
+<a class="doc-card" href="docs/android/index.html"><strong>Android support</strong><span>android.jar contains only public SDK stubs. A class absent from api-versions.xml is classified hidden_or_non_sdk…</span></a>
+<a class="doc-card" href="docs/ios/index.html"><strong>iOS / Apple (Flutter)</strong><span>Status: experimental. Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and UIKit…</span></a>
+<a class="doc-card" href="docs/native-ui.html"><strong>Native UI integration layer</strong><span>Generated bindings create native views like any other object; this layer shows them inside the framework's view tree…</span></a>
+<a class="doc-card" href="docs/troubleshooting/index.html"><strong>Troubleshooting</strong><span>Troubleshooting: native-api-bindgen documentation for generated Flutter and React Native bindings.</span></a>
+</div>
+<h2 id="architecture">Architecture</h2>
+<div class="doc-cards">
+<a class="doc-card" href="docs/architecture/overview.html"><strong>Architecture overview</strong><span>The Native IR is the single source of truth. Parsers produce IR; generators consume IR. No generator reads SDK files…</span></a>
+<a class="doc-card" href="docs/architecture/ir.html"><strong>Native IR</strong><span>Package: packages/native_api_ir. Schema version: 1 (irSchemaVersion).</span></a>
+<a class="doc-card" href="docs/architecture/type-mapping.html"><strong>Type mapping (Flutter / Dart over package:jni)</strong><span>Implemented once in packages/native_api_generator/lib/src/type_mapping.dart (DartJniTypeMapper). Emitters never…</span></a>
+<a class="doc-card" href="docs/architecture/lifecycle.html"><strong>Native object lifecycle, callbacks and threading</strong><span>Every generated object is a package:jni global reference wrapped in a zero-cost extension type.</span></a>
+<a class="doc-card" href="docs/architecture/rn-jsi.html"><strong>React Native target: TypeScript → JSI → C++ → JNI / Objective-C</strong><span>Design choices (see docs/technical-design.md for the decision log):</span></a>
+<a class="doc-card" href="docs/technical-design.html"><strong>Technical design</strong><span>Status: living document. Scope: foundation + Android → Flutter vertical slice.</span></a>
+</div>
+<h2 id="reference">Reference</h2>
+<div class="doc-cards">
+<a class="doc-card" href="docs/error-codes.html"><strong>Diagnostic / error codes</strong><span>Codes are stable; never renumber. Each diagnostic carries code, severity (info|warning|error), symbolId (when…</span></a>
+<a class="doc-card" href="docs/versioning.html"><strong>Versioning</strong><span>Versioning: native-api-bindgen documentation for generated Flutter and React Native bindings.</span></a>
+<a class="doc-card" href="docs/compatibility/matrix.html"><strong>Compatibility matrix</strong><span>Only versions actually exercised are listed. "Tested" means automated tests ran against that version on 2026-10-05 on…</span></a>
+<a class="doc-card" href="docs/benchmarks/index.html"><strong>Benchmarks</strong><span>Benchmarks: native-api-bindgen documentation for generated Flutter and React Native bindings.</span></a>
+<a class="doc-card" href="docs/benchmarks/performance.html"><strong>Performance</strong><span>Measured on 2026-10-05 on the maintainer's Apple-silicon Mac. Emulator and simulator numbers are not device numbers…</span></a>
+<a class="doc-card" href="docs/benchmarks/size.html"><strong>Binary size</strong><span>Measured 2026-10-05 with tools/measure_size.py --platform 36 (Flutter 3.41.9, package:jni 1.0.3, release APK…</span></a>
+<a class="doc-card" href="docs/sources/official-sources.html"><strong>Official source registry</strong><span>Every parser/generator subsystem must name its first-party source. Links were last reviewed 2026-10-05…</span></a>
+</div>
+<h2 id="project">Project</h2>
+<div class="doc-cards">
+<a class="doc-card" href="docs/roadmap.html"><strong>Roadmap</strong><span>Items below are plans, not features. Completed items are marked with the release that shipped them.</span></a>
+<a class="doc-card" href="docs/test-strategy.html"><strong>Test strategy</strong><span>Rules: no test may depend on network; golden tests must be stable across machines (no absolute paths, no timestamps)…</span></a>
+<a class="doc-card" href="docs/implementation-plan.html"><strong>Implementation plan</strong><span>Mirrors TRD §82. Each stage ends with: format → analyze → unit tests → generation tests → integration tests (where…</span></a>
+</div>
+<h2 id="legal">Legal</h2>
+<div class="doc-cards">
+<a class="doc-card" href="docs/legal/license-policy.html"><strong>License policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+<a class="doc-card" href="docs/legal/source-provenance.html"><strong>Source provenance</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+<a class="doc-card" href="docs/legal/android.html"><strong>Android legal / attribution policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+<a class="doc-card" href="docs/legal/apple.html"><strong>Apple SDK policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+<a class="doc-card" href="docs/legal/flutter.html"><strong>Flutter / Dart policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+<a class="doc-card" href="docs/legal/react-native.html"><strong>React Native policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+</div>
+
+
+<h2 id="generated-api-reference">Generated API reference</h2>
+<p>Run <code>native-api-bindgen docs</code> in your project: it writes <code>generated-docs/</code>, one page per generated type with the native symbol, the generated symbol, availability, threading, permissions, reason codes and a link to the official reference. It contains metadata only — no SDK documentation is copied — and stays local by default because it is derived from the SDK on your machine.</p>
+
+<h2 id="commands">Commands</h2>
+<pre><code>native-api-bindgen doctor        # SDKs and toolchains found
+native-api-bindgen generate ...  # android | flutter | ios | react-native
+native-api-bindgen update        # regenerate configured targets
+native-api-bindgen coverage      # generated vs. discovered, with reasons
+native-api-bindgen why-skipped   # why a symbol was not generated
+native-api-bindgen docs          # generated-docs/ (local API reference)
+native-api-bindgen audit-license # check inputs and outputs for licensing issues</code></pre>
+</div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="./"><img src="icon.svg" alt="" width="26" height="26"><span>native-api-bindgen</span></a>
+        <p>Typed Flutter and React Native bindings for public Android and iOS APIs, generated from the SDKs on your machine.</p>
+      </div>
+      <div><p class="foot-title">Product</p>
+        <a href="getting-started.html">Get started</a>
+        <a href="docs.html">Documentation</a>
+        <a href="examples.html">Examples</a>
+        <a href="compatibility.html">Compatibility</a>
+      </div>
+      <div><p class="foot-title">Platforms</p>
+        <a href="flutter.html">Flutter</a>
+        <a href="react-native.html">React Native</a>
+        <a href="android.html">Android</a>
+        <a href="ios.html">iOS</a>
+      </div>
+      <div><p class="foot-title">Project</p>
+        <a href="legal.html">License (Apache-2.0)</a>
+        <a href="legal.html">Legal &amp; source policy</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+    <div class="wrap foot-legal">
+      <p>Apache-2.0. Generated bindings are derived from SDKs installed on your machine and stay local by default.</p>
+      <p>Native API Bindgen is an independent open-source project. It is not affiliated with or endorsed by Google, Apple, Meta, or the Dart/Flutter project. Platform SDKs, documentation, trademarks, and other third-party materials remain the property of their respective owners and are subject to their applicable licenses and terms.</p>
+      <p>Android is a trademark of Google LLC. Apple, iOS, Xcode, Objective-C and Swift are trademarks of Apple Inc. Flutter and Dart are trademarks of Google LLC. React and React Native are trademarks of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>
