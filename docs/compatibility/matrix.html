@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Compatibility matrix · native-api-bindgen docs</title>
   <meta name="description" content="Only versions actually exercised are listed. &quot;Tested&quot; means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2…">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/compatibility/matrix.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Compatibility matrix · native-api-bindgen docs">
   <meta property="og:description" content="Only versions actually exercised are listed. &quot;Tested&quot; means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2…">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/compatibility/matrix.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="../../icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../../site.webmanifest">
   <link rel="stylesheet" href="../../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Compatibility matrix","description":"Only versions actually exercised are listed. \"Tested\" means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2…","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Compatibility matrix","description":"Only versions actually exercised are listed. \"Tested\" means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2…","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs/compatibility/matrix.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -55,7 +57,7 @@
   <article class="doc prose">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Reference</nav>
     <h1>Compatibility matrix</h1>
-<p>Only versions <strong>actually exercised</strong> are listed. &quot;Tested&quot; means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2 arm64). CI workflows exist (<code>.github/workflows</code>) but have not run yet because the repository has no remote (<code>tools/ci_local.sh</code> runs the platform-independent steps locally); this table will be generated from CI once they do.</p>
+<p>Only versions <strong>actually exercised</strong> are listed. &quot;Tested&quot; means automated tests ran against that version on 2026-10-05 on the maintainer machine (macOS 27.2 arm64). CI runs the same checks on GitHub Actions (<code>.github/workflows</code>); <code>tools/ci_local.sh</code> runs the platform-independent steps locally.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -152,13 +154,40 @@
 </tr>
 <tr>
 <td><code>native_api_ui</code> (Flutter plugin)</td>
-<td>0.1.0-dev.1</td>
+<td>0.1.0-beta.1</td>
 <td>native views on the Android emulator and iOS simulator</td>
 </tr>
 <tr>
 <td>Node / TypeScript</td>
 <td>25.9.0 / 6.0.3</td>
 <td><code>tsc --strict</code> on generated output (fixtures, slice, full android-36 SDK)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="published-packages">Published packages<a class="anchor" href="#published-packages" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Package</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pub.dev</td>
+<td><code>native_api_bindgen</code> (CLI), <code>native_api_runtime</code>, <code>native_api_ui</code>, and <code>native_api_ir</code>, <code>native_api_core</code>, <code>native_api_generator</code>, <code>native_api_android</code>, <code>native_api_ios</code>, <code>native_api_flutter_android</code>, <code>native_api_flutter_ios</code>, <code>native_api_react_native_android</code>, <code>native_api_react_native_ios</code></td>
+<td>0.1.0-beta.1</td>
+</tr>
+<tr>
+<td>npm</td>
+<td><code>native-api-bindgen-runtime</code> (dist-tags <code>beta</code>, <code>latest</code>)</td>
+<td>0.1.0-beta.1</td>
+</tr>
+<tr>
+<td>GitHub Releases / Homebrew</td>
+<td><code>native-api-bindgen</code> binaries: macOS arm64/x64, Linux x64/arm64; <code>brew install lkrjangid1/tap/native-api-bindgen</code></td>
+<td>from tag <code>v0.1.0-beta.1</code></td>
 </tr>
 </tbody>
 </table></div>
@@ -217,10 +246,15 @@
 <li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
 <li><a href="../legal/react-native.html">React Native policy</a></li>
 </ul>
+<p class="side-group">More</p>
+<ul>
+<li><a href="../releasing.html">Releasing</a></li>
+</ul>
   </aside>
   <nav class="toc" aria-label="On this page">
     <p>On this page</p>
     <ul>
+      <li><a href="#published-packages">Published packages</a></li>
       <li><a href="#known-constraints">Known constraints</a></li>
     </ul>
   </nav>

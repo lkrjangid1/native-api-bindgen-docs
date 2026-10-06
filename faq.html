@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FAQ — native-api-bindgen</title>
   <meta name="description" content="Answers to common questions about native-api-bindgen: platform channels, plugins, app size, unsupported APIs, private APIs and publishing generated code.">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/faq.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="FAQ — native-api-bindgen">
   <meta property="og:description" content="Answers to common questions about native-api-bindgen: platform channels, plugins, app size, unsupported APIs, private APIs and publishing generated code.">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/faq.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"FAQ","description":"Answers to common questions about native-api-bindgen: platform channels, plugins, app size, unsupported APIs, private APIs and publishing generated code.","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"FAQ","description":"Answers to common questions about native-api-bindgen: platform channels, plugins, app size, unsupported APIs, private APIs and publishing generated code.","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/faq.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -70,7 +72,9 @@
 <h2>Can I publish the generated bindings?</h2>
 <p>The default policy keeps them in your project. Redistribution has not had legal review; see <a href="legal.html">Legal</a>.</p>
 <h2>Is it production-ready?</h2>
-<p>Not yet. It is experimental: the vertical slices are tested on an emulator and a simulator, not on physical devices, and generated APIs may change.</p>
+<p>Not yet. It is in beta (<code>0.1.0-beta.1</code>): the vertical slices are tested on an emulator and a simulator, not on physical devices, and generated APIs may change between beta releases.</p>
+<h2>Where is it published?</h2>
+<p>The CLI and the Dart runtimes are on <a href="https://pub.dev/packages/native_api_bindgen">pub.dev</a> (<code>native_api_bindgen</code>, <code>native_api_runtime</code>, <code>native_api_ui</code>). Prebuilt CLI binaries are on GitHub Releases and in the Homebrew tap (<code>brew install lkrjangid1/tap/native-api-bindgen</code>). The React Native runtime is on <a href="https://www.npmjs.com/package/native-api-bindgen-runtime">npm</a> as <code>native-api-bindgen-runtime</code>.</p>
 </div>
   </main>
   <footer class="site-footer">

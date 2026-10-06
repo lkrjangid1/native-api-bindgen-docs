@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Native UI integration layer · native-api-bindgen docs</title>
   <meta name="description" content="Generated bindings create native views like any other object; this layer shows them inside the framework's view tree. It is the only part of the project…">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/native-ui.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Native UI integration layer · native-api-bindgen docs">
   <meta property="og:description" content="Generated bindings create native views like any other object; this layer shows them inside the framework's view tree. It is the only part of the project…">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/native-ui.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="../icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../site.webmanifest">
   <link rel="stylesheet" href="../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Native UI integration layer","description":"Generated bindings create native views like any other object; this layer shows them inside the framework's view tree. It is the only part of the project…","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Native UI integration layer","description":"Generated bindings create native views like any other object; this layer shows them inside the framework's view tree. It is the only part of the project…","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs/native-ui.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href=".././"><img src="../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -61,8 +63,7 @@ project that uses the Flutter plugin API / React Native view managers.
 Everything else stays plugin-free.</p>
 <h2 id="flutter--runtimesflutternative_api_ui">Flutter — <code>runtimes/flutter/native_api_ui</code><a class="anchor" href="#flutter--runtimesflutternative_api_ui" aria-label="Link to this section">#</a></h2>
 <pre><code class="language-yaml">dependencies:
-  native_api_ui:
-    path: &lt;repo&gt;/runtimes/flutter/native_api_ui
+  native_api_ui: ^0.1.0-beta.1   # pub.dev
 </code></pre>
 <pre><code class="language-dart">// Android: any binding of an android.view.View subclass.
 final label = TextView(appContext)..setText$CharSequence('Hi'.toJString());
@@ -179,6 +180,10 @@ provide, multiple simultaneous hosts of one view, and UI classes that are not
 <li><a href="legal/apple.html">Apple SDK policy</a></li>
 <li><a href="legal/flutter.html">Flutter / Dart policy</a></li>
 <li><a href="legal/react-native.html">React Native policy</a></li>
+</ul>
+<p class="side-group">More</p>
+<ul>
+<li><a href="releasing.html">Releasing</a></li>
 </ul>
   </aside>
   <nav class="toc" aria-label="On this page">

@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Documentation — native-api-bindgen</title>
   <meta name="description" content="The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Documentation — native-api-bindgen">
   <meta property="og:description" content="The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Documentation","description":"The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Documentation","description":"The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -61,11 +63,11 @@
 <div class="wrap page-body prose">
 <h2 id="guides">Guides</h2>
 <div class="doc-cards">
-<a class="doc-card" href="docs/getting-started/index.html"><strong>Getting started (Flutter on Android)</strong><span>Experimental. Generated bindings are derived from the Android SDK on your machine and are kept local by default.</span></a>
+<a class="doc-card" href="docs/getting-started/index.html"><strong>Getting started (Flutter on Android)</strong><span>Beta (0.1.0-beta.1). Generated bindings are derived from the Android SDK on your machine and are kept local by default.</span></a>
 <a class="doc-card" href="docs/flutter/index.html"><strong>Flutter / Dart target</strong><span>Generated code uses only the officially supported Dart↔Java interop path: package:jni (the runtime used by jnigen)…</span></a>
-<a class="doc-card" href="docs/react-native/index.html"><strong>React Native</strong><span>Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one…</span></a>
+<a class="doc-card" href="docs/react-native/index.html"><strong>React Native</strong><span>Beta (0.1.0-beta.1). New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share…</span></a>
 <a class="doc-card" href="docs/android/index.html"><strong>Android support</strong><span>android.jar contains only public SDK stubs. A class absent from api-versions.xml is classified hidden_or_non_sdk…</span></a>
-<a class="doc-card" href="docs/ios/index.html"><strong>iOS / Apple (Flutter)</strong><span>Status: experimental. Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and UIKit…</span></a>
+<a class="doc-card" href="docs/ios/index.html"><strong>iOS / Apple (Flutter)</strong><span>Status: beta (0.1.0-beta.1). Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and…</span></a>
 <a class="doc-card" href="docs/native-ui.html"><strong>Native UI integration layer</strong><span>Generated bindings create native views like any other object; this layer shows them inside the framework's view tree…</span></a>
 <a class="doc-card" href="docs/troubleshooting/index.html"><strong>Troubleshooting</strong><span>Troubleshooting: native-api-bindgen documentation for generated Flutter and React Native bindings.</span></a>
 </div>
@@ -102,6 +104,10 @@
 <a class="doc-card" href="docs/legal/apple.html"><strong>Apple SDK policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
 <a class="doc-card" href="docs/legal/flutter.html"><strong>Flutter / Dart policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
 <a class="doc-card" href="docs/legal/react-native.html"><strong>React Native policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+</div>
+<h2 id="more">More</h2>
+<div class="doc-cards">
+<a class="doc-card" href="docs/releasing.html"><strong>Releasing</strong><span>Versions are shared by every package. Beta releases use X.Y.Z-beta.N.</span></a>
 </div>
 
 

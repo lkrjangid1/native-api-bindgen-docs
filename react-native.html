@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>React Native — native-api-bindgen</title>
   <meta name="description" content="Generated TypeScript bindings for React Native's New Architecture, backed by one pure C++ Turbo Module, JSI, JNI on Android and Objective-C++ on iOS.">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/react-native.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="React Native — native-api-bindgen">
   <meta property="og:description" content="Generated TypeScript bindings for React Native's New Architecture, backed by one pure C++ Turbo Module, JSI, JNI on Android and Objective-C++ on iOS.">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/react-native.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"React Native","description":"Generated TypeScript bindings for React Native's New Architecture, backed by one pure C++ Turbo Module, JSI, JNI on Android and Objective-C++ on iOS.","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"React Native","description":"Generated TypeScript bindings for React Native's New Architecture, backed by one pure C++ Turbo Module, JSI, JNI on Android and Objective-C++ on iOS.","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/react-native.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -76,6 +78,7 @@
   <li>Android: include the generated CMake fragment and provide the module in <code>OnLoad.cpp</code>.</li>
   <li>iOS: <code>pod 'NativeApiBindings', :path =&gt; '../native-api-bindings'</code>.</li>
 </ul>
+<p>The generated library embeds the runtime. To depend on it instead, install <code>native-api-bindgen-runtime</code> from <a href="https://www.npmjs.com/package/native-api-bindgen-runtime">npm</a> (<code>npm install native-api-bindgen-runtime@beta</code>).</p>
 <p>The repository's <code>examples/react-native/slice</code> app does all of this and runs 12 self-tests on each platform.</p>
 
 <h2>Measured</h2>

@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Test strategy · native-api-bindgen docs</title>
-  <meta name="description" content="Rules: no test may depend on network; golden tests must be stable across machines (no absolute paths, no timestamps); tests that need a JDK or SDK skip…">
-  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/test-strategy.html">
+  <title>Releasing · native-api-bindgen docs</title>
+  <meta name="description" content="Versions are shared by every package. Beta releases use X.Y.Z-beta.N.">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/releasing.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Test strategy · native-api-bindgen docs">
-  <meta property="og:description" content="Rules: no test may depend on network; golden tests must be stable across machines (no absolute paths, no timestamps); tests that need a JDK or SDK skip…">
-  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/test-strategy.html">
+  <meta property="og:title" content="Releasing · native-api-bindgen docs">
+  <meta property="og:description" content="Versions are shared by every package. Beta releases use X.Y.Z-beta.N.">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/releasing.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -18,7 +18,7 @@
   <link rel="icon" href="../icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../site.webmanifest">
   <link rel="stylesheet" href="../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Test strategy","description":"Rules: no test may depend on network; golden tests must be stable across machines (no absolute paths, no timestamps); tests that need a JDK or SDK skip…","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs/test-strategy.html","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Releasing","description":"Versions are shared by every package. Beta releases use X.Y.Z-beta.N.","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs/releasing.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
@@ -55,77 +55,47 @@
   <main id="content">
 <div class="wrap docs-shell">
   <article class="doc prose">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../docs.html">Docs</a><span>/</span>Project</nav>
-    <h1>Test strategy</h1>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>Layer</th>
-<th>What</th>
-<th>Where</th>
-<th>Runs on</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Unit</td>
-<td>IR IDs, JSON round-trip, validation; config; path guard; logging; class-file &amp; signature parsers; api-versions/annotations parsing; type mapping; identifier escaping; overload naming</td>
-<td><code>packages/*/test</code></td>
-<td>any OS (CI ubuntu)</td>
-</tr>
-<tr>
-<td>Fuzz</td>
-<td>truncated/mutated class files, zips, XML, IR JSON → must return diagnostics, never throw uncaught</td>
-<td><code>packages/native_api_android/test/fuzz_test.dart</code>, <code>packages/native_api_ir/test/fuzz_test.dart</code></td>
-<td>any OS</td>
-</tr>
-<tr>
-<td>Fixtures</td>
-<td>synthetic Java (<code>fixtures/java/basic</code>) compiled with <code>javac --release 17</code> at test time → parse → IR snapshot</td>
-<td><code>packages/native_api_android/test/fixture_test.dart</code></td>
-<td>needs JDK</td>
-</tr>
-<tr>
-<td>Golden</td>
-<td>generated Dart for fixtures compared byte-for-byte with <code>tests/golden/flutter/basic</code>; goldens are also analyzed with <code>dart analyze</code></td>
-<td><code>packages/native_api_flutter_android/test</code></td>
-<td>needs JDK</td>
-</tr>
-<tr>
-<td>Real SDK</td>
-<td>parse local android-N, assert slice signatures, availability, nullability</td>
-<td><code>packages/native_api_android/test/real_sdk_test.dart</code> (skipped with reason when no SDK)</td>
-<td>dev machines / android CI job</td>
-</tr>
-<tr>
-<td>Determinism</td>
-<td>generate twice, compare bytes; <code>verify-reproducible</code> command</td>
-<td>CLI tests</td>
-<td>any OS</td>
-</tr>
-<tr>
-<td>Legal</td>
-<td>scanner detects Mach-O, <code>.framework</code>, Apple header banners, class files/jar, large doc dumps</td>
-<td><code>packages/native_api_core/test/legal_*</code> + <code>tests/legal</code> fixtures</td>
-<td>any OS</td>
-</tr>
-<tr>
-<td>Integration (real device/emulator)</td>
-<td>generated bindings call the real Android framework from Flutter</td>
-<td><code>examples/flutter/android_slice/integration_test</code></td>
-<td>emulator</td>
-</tr>
-<tr>
-<td>Size</td>
-<td>release APK sizes for baseline / imported-unused / one-API</td>
-<td><code>docs/benchmarks/size.md</code></td>
-<td>local / android CI</td>
-</tr>
-</tbody>
-</table></div>
-<p>Rules: no test may depend on network; golden tests must be stable across machines (no absolute paths, no timestamps); tests that need a JDK or SDK skip with an explicit reason rather than pass vacuously.</p>
-    <div class="doc-foot"><span>Source: <code>docs/test-strategy.md</code></span></div>
-    <nav class="pager" aria-label="Previous and next"><a class="prev" href="roadmap.html"><small>Previous</small>Roadmap</a><a class="next" href="implementation-plan.html"><small>Next</small>Implementation plan</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../docs.html">Docs</a><span>/</span>More</nav>
+    <h1>Releasing</h1>
+<p>Versions are shared by every package. Beta releases use <code>X.Y.Z-beta.N</code>.</p>
+<ol>
+<li>Bump the version everywhere: <code>pubspec.yaml</code> files, <code>ProjectInfo</code> in <code>native_api_core</code>, <code>runtimes/jsi/package.json</code> and the runtime version strings, then regenerate goldens. Add a <code>## [X.Y.Z-beta.N] - &lt;date&gt;</code> section to <code>CHANGELOG.md</code>.</li>
+<li><code>bash tools/ci_local.sh</code> and <code>bash tools/check_publish.sh</code> are green.</li>
+<li><strong>pub.dev</strong> (manual): <code>dart pub publish</code> in dependency order:
+<ul>
+<li><code>native_api_ir</code></li>
+<li><code>native_api_core</code></li>
+<li><code>native_api_generator</code>, <code>native_api_android</code>, <code>native_api_ios</code></li>
+<li><code>native_api_flutter_android</code>, <code>native_api_flutter_ios</code>, <code>native_api_react_native_android</code>, <code>native_api_react_native_ios</code></li>
+<li><code>native_api_cli</code> (package <code>native_api_bindgen</code>)</li>
+<li><code>native_api_runtime</code></li>
+<li><code>native_api_ui</code> (with <code>flutter pub publish</code>)</li>
+</ul>
+</li>
+<li><strong>npm</strong> (manual): <code>cd runtimes/jsi &amp;&amp; npm publish --tag beta</code>. The account uses two-factor authentication, so run it from an interactive terminal and approve the staged publish on npmjs.com.</li>
+<li><strong>GitHub Release and Homebrew</strong>: push a tag <code>vX.Y.Z-beta.N</code>. <code>.github/workflows/release.yml</code> then:
+<ul>
+<li>runs <code>release-check</code>;</li>
+<li>compiles <code>native-api-bindgen</code> with <code>dart compile exe</code> for <code>macos-arm64</code>, <code>macos-x64</code>, <code>linux-x64</code> and <code>linux-arm64</code>;</li>
+<li>attaches the <code>.tar.gz</code> archives and their <code>.sha256</code> files to a GitHub Release (marked as a pre-release when the tag contains <code>-</code>);</li>
+<li>writes <code>Formula/native-api-bindgen.rb</code> in <code>lkrjangid1/homebrew-tap</code> with <code>tools/homebrew_formula.py</code>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="homebrew-tap-one-time-setup">Homebrew tap: one-time setup<a class="anchor" href="#homebrew-tap-one-time-setup" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Create the public repository <code>lkrjangid1/homebrew-tap</code>, with a README and the default branch <code>main</code>.</li>
+<li>Create a fine-grained personal access token limited to that repository, with <strong>Contents: Read and write</strong>.</li>
+<li>In <code>lkrjangid1/native-api-bindgen</code> → Settings → Secrets and variables → Actions, add it as <code>HOMEBREW_TAP_TOKEN</code>.</li>
+</ol>
+<p>Without the secret the release still succeeds; the <code>homebrew</code> job only logs a warning. To update the tap by hand, download the release's <code>.sha256</code> files into a directory and run:</p>
+<pre><code class="language-bash">python3 tools/homebrew_formula.py 0.1.0-beta.1 &lt;dir&gt; &gt; Formula/native-api-bindgen.rb
+</code></pre>
+<p>Users install with:</p>
+<pre><code class="language-bash">brew install lkrjangid1/tap/native-api-bindgen
+</code></pre>
+    <div class="doc-foot"><span>Source: <code>docs/releasing.md</code></span></div>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="legal/react-native.html"><small>Previous</small>React Native policy</a><span></span></nav>
   </article>
   <aside class="docs-side" aria-label="Documentation">
 <a class="side-home" href="../docs.html">Overview</a>
@@ -161,7 +131,7 @@
 <p class="side-group">Project</p>
 <ul>
 <li><a href="roadmap.html">Roadmap</a></li>
-<li><a href="test-strategy.html" aria-current="page">Test strategy</a></li>
+<li><a href="test-strategy.html">Test strategy</a></li>
 <li><a href="implementation-plan.html">Implementation plan</a></li>
 </ul>
 <p class="side-group">Legal</p>
@@ -175,10 +145,15 @@
 </ul>
 <p class="side-group">More</p>
 <ul>
-<li><a href="releasing.html">Releasing</a></li>
+<li><a href="releasing.html" aria-current="page">Releasing</a></li>
 </ul>
   </aside>
-
+  <nav class="toc" aria-label="On this page">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#homebrew-tap-one-time-setup">Homebrew tap: one-time setup</a></li>
+    </ul>
+  </nav>
 </div>
   </main>
   <footer class="site-footer">

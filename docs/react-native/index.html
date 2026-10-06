@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>React Native · native-api-bindgen docs</title>
-  <meta name="description" content="Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo…">
+  <meta name="description" content="Beta (0.1.0-beta.1). New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++…">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/react-native/index.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="React Native · native-api-bindgen docs">
-  <meta property="og:description" content="Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo…">
+  <meta property="og:description" content="Beta (0.1.0-beta.1). New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++…">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/react-native/index.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="../../icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../../site.webmanifest">
   <link rel="stylesheet" href="../../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"React Native","description":"Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo…","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"React Native","description":"Beta (0.1.0-beta.1). New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++…","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs/react-native/index.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -56,7 +58,7 @@
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../docs.html">Docs</a><span>/</span>Guides</nav>
     <h1>React Native</h1>
 <blockquote>
-<p>Experimental. New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo Module.</p>
+<p>Beta (<code>0.1.0-beta.1</code>). New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share one bindings library and one pure C++ Turbo Module.</p>
 </blockquote>
 <p><code>native-api-bindgen generate react-native</code> writes a self-contained bindings library (default <code>native-api-bindings/</code>) into your app for every configured platform (<code>react-native-android</code> / <code>react-native-ios</code> select one). iOS generation needs macOS with Xcode; elsewhere it is skipped with a warning.</p>
 <h2 id="android">Android<a class="anchor" href="#android" aria-label="Link to this section">#</a></h2>
@@ -90,6 +92,7 @@
 </tr>
 </tbody>
 </table></div>
+<p>The runtime is embedded in the generated library. Apps that prefer a dependency can install it from npm instead: <code>npm install native-api-bindgen-runtime@beta</code> (<a href="https://www.npmjs.com/package/native-api-bindgen-runtime" rel="noopener">native-api-bindgen-runtime</a>).</p>
 <p>One-time app integration is described in the generated <code>README.md</code> (codegenConfig, CMake + <code>OnLoad.cpp</code> per reactnative.dev &quot;pure C++ modules&quot;, Gradle source set, <code>NabContext.init(this)</code>). <code>examples/react-native/slice</code> is a complete working app.</p>
 <h2 id="usage">Usage<a class="anchor" href="#usage" aria-label="Link to this section">#</a></h2>
 <pre><code class="language-ts">import {Intent, Uri, Handler, Looper, Runnable, applicationContext, currentActivity} from './native-api-bindings';
@@ -210,6 +213,10 @@ try {
 <li><a href="../legal/apple.html">Apple SDK policy</a></li>
 <li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
 <li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+<p class="side-group">More</p>
+<ul>
+<li><a href="../releasing.html">Releasing</a></li>
 </ul>
   </aside>
   <nav class="toc" aria-label="On this page">

@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flutter / Dart target · native-api-bindgen docs</title>
   <meta name="description" content="Generated code uses only the officially supported Dart↔Java interop path: package:jni (the runtime used by jnigen). There is no MethodChannel in the…">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/flutter/index.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Flutter / Dart target · native-api-bindgen docs">
   <meta property="og:description" content="Generated code uses only the officially supported Dart↔Java interop path: package:jni (the runtime used by jnigen). There is no MethodChannel in the…">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/flutter/index.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="../../icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../../site.webmanifest">
   <link rel="stylesheet" href="../../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Flutter / Dart target","description":"Generated code uses only the officially supported Dart↔Java interop path: package:jni (the runtime used by jnigen). There is no MethodChannel in the…","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Flutter / Dart target","description":"Generated code uses only the officially supported Dart↔Java interop path: package:jni (the runtime used by jnigen). There is no MethodChannel in the…","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs/flutter/index.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -60,8 +62,16 @@
 <li>Each Java type → Dart extension type over <code>JObject</code> (zero-cost, tree-shakable, no registry).</li>
 <li>Strict-native mode (default) keeps JNI types visible (<code>JString</code>, <code>JIntArray</code>); <code>ergonomic-dart</code> maps <code>String</code> to Dart <code>String</code> with automatic conversion/release.</li>
 <li>Lifecycle, callbacks and threading: see <code>docs/architecture/lifecycle.md</code>.</li>
-<li>iOS (Objective-C via <code>package:objective_c</code>) is not implemented yet.</li>
+<li>iOS: Dart bindings over <a href="https://pub.dev/packages/objective_c" rel="noopener"><code>package:objective_c</code></a>; see <code>docs/ios/README.md</code>.</li>
 </ul>
+<p>Runtime dependencies (pub.dev):</p>
+<pre><code class="language-yaml">dependencies:
+  jni: ^1.0.3
+  jni_flutter: ^1.0.3
+  objective_c: 9.5.0
+  native_api_runtime: ^0.1.0-beta.1
+  native_api_ui: ^0.1.0-beta.1     # optional: native views
+</code></pre>
     <div class="doc-foot"><span>Source: <code>docs/flutter/README.md</code></span></div>
     <nav class="pager" aria-label="Previous and next"><a class="prev" href="../getting-started/index.html"><small>Previous</small>Getting started (Flutter on Android)</a><a class="next" href="../react-native/index.html"><small>Next</small>React Native</a></nav>
   </article>
@@ -110,6 +120,10 @@
 <li><a href="../legal/apple.html">Apple SDK policy</a></li>
 <li><a href="../legal/flutter.html">Flutter / Dart policy</a></li>
 <li><a href="../legal/react-native.html">React Native policy</a></li>
+</ul>
+<p class="side-group">More</p>
+<ul>
+<li><a href="../releasing.html">Releasing</a></li>
 </ul>
   </aside>
 

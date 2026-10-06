@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>React Native policy · native-api-bindgen docs</title>
   <meta name="description" content="Not legal advice. This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.">
+  <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/react-native.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="React Native policy · native-api-bindgen docs">
   <meta property="og:description" content="Not legal advice. This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.">
+  <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/react-native.html">
   <meta property="og:site_name" content="native-api-bindgen">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
@@ -16,14 +18,14 @@
   <link rel="icon" href="../../icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../../site.webmanifest">
   <link rel="stylesheet" href="../../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"React Native policy","description":"Not legal advice. This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"React Native policy","description":"Not legal advice. This document describes engineering policy. Organizations should perform their own legal review before commercial redistribution.","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/react-native.html","inLanguage":"en"}</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="../.././"><img src="../../icon.svg" alt="" width="30" height="30"><span>native-api-bindgen</span></a>
-      <span class="badge" title="APIs, output and configuration may change">Experimental</span>
+      <span class="badge" title="0.1.0-beta.1: APIs, output and configuration may change">Beta</span>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
       <div class="nav-wrap">
@@ -60,7 +62,7 @@
 </blockquote>
 <p>Android support (experimental) targets the New Architecture (JSI, a pure C++ Turbo Module, Codegen) per <a href="https://reactnative.dev" rel="noopener">https://reactnative.dev</a>. React Native (MIT) is a dependency of the app, never vendored. The example app's <code>OnLoad.cpp</code> and <code>CMakeLists.txt</code> were written for this project following the documented setup rather than copied from React Native sources. Generated libraries contain only project runtime code (Apache-2.0) and SDK-derived names/descriptors/selectors (same policy as Flutter output: local-only by default). On iOS (experimental) the Turbo Module is registered through the documented <code>codegenConfig.ios.modulesProvider</code> mechanism and the generated podspec links only the frameworks the developer configured; Apple SDK policy (<code>docs/legal/apple.md</code>) applies to the iOS half. React and React Native are trademarks of Meta Platforms, Inc.; this project is not affiliated with or endorsed by Meta.</p>
     <div class="doc-foot"><span>Source: <code>docs/legal/react-native.md</code></span></div>
-    <nav class="pager" aria-label="Previous and next"><a class="prev" href="flutter.html"><small>Previous</small>Flutter / Dart policy</a><span></span></nav>
+    <nav class="pager" aria-label="Previous and next"><a class="prev" href="flutter.html"><small>Previous</small>Flutter / Dart policy</a><a class="next" href="../releasing.html"><small>Next</small>Releasing</a></nav>
   </article>
   <aside class="docs-side" aria-label="Documentation">
 <a class="side-home" href="../../docs.html">Overview</a>
@@ -107,6 +109,10 @@
 <li><a href="apple.html">Apple SDK policy</a></li>
 <li><a href="flutter.html">Flutter / Dart policy</a></li>
 <li><a href="react-native.html" aria-current="page">React Native policy</a></li>
+</ul>
+<p class="side-group">More</p>
+<ul>
+<li><a href="../releasing.html">Releasing</a></li>
 </ul>
   </aside>
 
