@@ -1,0 +1,67 @@
+# native-api-bindgen
+
+> Generates typed Flutter (Dart) and React Native (TypeScript) bindings for public Android and iOS platform APIs from the SDKs installed on the developer's machine. Apache-2.0, beta (0.1.0-beta.1) on pub.dev, npm and Homebrew.
+
+## Site
+
+- [native-api-bindgen — bindings for Android and iOS APIs](https://lkrjangid1.github.io/native-api-bindgen-docs/): Generate typed Flutter and React Native bindings for public Android and iOS SDK APIs from your local SDKs. Beta on pub.dev, npm and Homebrew; Apache-2.0.
+- [Getting started](https://lkrjangid1.github.io/native-api-bindgen-docs/getting-started.html): Install the native-api-bindgen CLI, select the Android or iOS APIs you need, and generate Flutter or React Native bindings from your local SDKs.
+- [Documentation](https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html): The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.
+- [Examples](https://lkrjangid1.github.io/native-api-bindgen-docs/examples.html): Real tasks with native-api-bindgen in Flutter and React Native on Android and iOS: device dashboard, text-to-speech, share sheet, clipboard and haptics.
+- [Architecture](https://lkrjangid1.github.io/native-api-bindgen-docs/architecture.html): How native-api-bindgen turns platform SDKs into a canonical IR and generates Dart and TypeScript bindings with small, data-driven runtimes.
+- [Flutter](https://lkrjangid1.github.io/native-api-bindgen-docs/flutter.html): Generated Dart bindings for Flutter: Android APIs over package:jni and iOS APIs over package:objective_c, with guards, callbacks and lifetimes.
+- [React Native](https://lkrjangid1.github.io/native-api-bindgen-docs/react-native.html): Generated TypeScript bindings for React Native's New Architecture, backed by one pure C++ Turbo Module, JSI, JNI on Android and Objective-C++ on iOS.
+- [Android](https://lkrjangid1.github.io/native-api-bindgen-docs/android.html): What native-api-bindgen reads from the Android SDK, which Java and Kotlin API shapes it supports, and how hidden and non-SDK APIs are excluded.
+- [iOS](https://lkrjangid1.github.io/native-api-bindgen-docs/ios.html): How native-api-bindgen reads Objective-C APIs with the Xcode toolchain's libclang and wraps Swift-only APIs with generated @objc adapters.
+- [Versioning](https://lkrjangid1.github.io/native-api-bindgen-docs/versioning.html): How native-api-bindgen versions the generator, the IR schema and generated APIs separately from Android and iOS SDK versions.
+- [Compatibility](https://lkrjangid1.github.io/native-api-bindgen-docs/compatibility.html): Exactly which SDKs, toolchains, devices and frameworks native-api-bindgen has been tested with, and the measured size and performance results.
+- [Legal and source policy](https://lkrjangid1.github.io/native-api-bindgen-docs/legal.html): How native-api-bindgen uses platform SDKs without copying or redistributing them, what generated output contains, and what still needs legal review.
+- [FAQ](https://lkrjangid1.github.io/native-api-bindgen-docs/faq.html): Answers to common questions about native-api-bindgen: platform channels, plugins, app size, unsupported APIs, private APIs and publishing generated code.
+
+## Docs: Guides
+
+- [Getting started (Flutter on Android)](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/getting-started/index.html): Step by step: install the native-api-bindgen CLI, check your machine, configure the Android APIs you need, and generate and call Flutter bindings.
+- [Flutter / Dart target](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/flutter/index.html): How generated Flutter bindings call Android APIs through package:jni without MethodChannel: generated code shape, runtime, guards and usage.
+- [React Native](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/react-native/index.html): Generating a React Native bindings library for Android and iOS: setup, usage from TypeScript, call semantics, and the size cost.
+- [Android support](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/android/index.html): What native-api-bindgen reads from android.jar and api-versions.xml, which Java and Kotlin API shapes it generates, and how hidden APIs are excluded.
+- [iOS / Apple (Flutter)](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/ios/index.html): Generating Flutter bindings for iOS: Objective-C APIs via libclang, main-actor threading, blocks, protocols, and @objc adapters for Swift-only APIs.
+- [Native UI integration layer](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/native-ui.html): How generated bindings show native Android and iOS views inside Flutter and React Native view trees with native_api_ui and NativeView.
+- [Troubleshooting](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/troubleshooting/index.html): Fixes for common native-api-bindgen problems: SDK not found, missing methods, unavailable APIs, released objects and callback hangs.
+
+## Docs: Architecture
+
+- [Architecture overview](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/architecture/overview.html): How native-api-bindgen is structured: the IR as single source of truth, the packages, and the data flow from SDK parsing to generated Flutter code.
+- [Native IR](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/architecture/ir.html): The Native IR: platform-neutral nodes, types, stable symbol IDs and validation rules that connect the SDK parsers to the Dart and TypeScript generators.
+- [Type mapping (Flutter / Dart over package:jni)](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/architecture/type-mapping.html): How Java and Kotlin types map to Dart types and JNI arguments in generated Flutter bindings, plus the naming rules for members and overloads.
+- [Native object lifecycle, callbacks and threading](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/architecture/lifecycle.html): How generated bindings own native objects, release them, implement Java callbacks in Dart, and handle threads and API-level availability.
+- [React Native target: TypeScript → JSI → C++ → JNI / Objective-C](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/architecture/rn-jsi.html): How generated React Native bindings call Android and iOS APIs: TypeScript modules, a JSI host object, a C++ Turbo Module, JNI and NSInvocation.
+- [Technical design](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/technical-design.html): Design decisions behind native-api-bindgen: the IR, Android class-file parsing, Flutter Android generation, and what is out of scope.
+
+## Docs: Reference
+
+- [Diagnostic / error codes](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/error-codes.html): Every native-api-bindgen diagnostic code (E001 and up): what it means, why a symbol was skipped, and what to do about it.
+- [Versioning](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/versioning.html): How native-api-bindgen versions the generator, the IR schema and generated APIs, and what counts as a breaking change.
+- [Compatibility matrix](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/compatibility/matrix.html): Versions of Flutter, Dart, React Native, Android SDK, Xcode and JDK that native-api-bindgen has been tested with, plus published packages and limits.
+- [Benchmarks](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/benchmarks/index.html): Index of native-api-bindgen benchmarks: release APK size of generated bindings and call overhead compared with MethodChannel and React Native JSI.
+- [Performance](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/benchmarks/performance.html): Measured call overhead of generated Flutter and React Native bindings versus MethodChannel on Android and iOS, plus byte transfers and callback latency.
+- [Binary size](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/benchmarks/size.html): Measured app size impact of generated bindings: Flutter and React Native release APKs, iOS app size, App Bundle and startup time, with method.
+- [Official source registry](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/sources/official-sources.html): The first-party sources behind each native-api-bindgen parser and generator: local SDK inputs and official Flutter, Android, Apple and React Native docs.
+
+## Docs: Project
+
+- [Roadmap](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/roadmap.html): Planned work for native-api-bindgen by phase: Android and iOS API coverage, callbacks, generics, Kotlin and Swift support, and React Native.
+- [Test strategy](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/test-strategy.html): How native-api-bindgen is tested: unit, fuzz, fixture, golden and integration tests on emulators and simulators, and where each layer runs.
+- [Implementation plan](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/implementation-plan.html): The staged implementation plan for native-api-bindgen and the quality gates every stage passes: format, analyze, unit, golden and integration tests.
+
+## Docs: Legal
+
+- [License policy](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/license-policy.html): The native-api-bindgen license policy: Apache-2.0 project source, what it does not cover, and how audit-license classifies files and dependencies.
+- [Source provenance](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/source-provenance.html): Where every input and output of native-api-bindgen comes from: what is consumed locally, what is redistributed, and the private API policy.
+- [Android legal / attribution policy](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/android.html): How native-api-bindgen uses the Android SDK: inputs, documentation licensing, redistribution of generated bindings, and Android trademark use.
+- [Apple SDK policy](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/apple.html): How native-api-bindgen reads Apple SDK headers in place with Xcode, what it never copies, and what the Xcode and Apple SDKs Agreement allows.
+- [Flutter / Dart policy](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/flutter.html): Policy for Flutter and Dart: package:jni as a normal pub dependency, the documented Java interop path, no MethodChannel, and trademark notes.
+- [React Native policy](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/legal/react-native.html): Policy for React Native: New Architecture via documented Turbo Module setup, no vendored React Native sources, and local-only generated libraries.
+
+## Docs: More
+
+- [Releasing](https://lkrjangid1.github.io/native-api-bindgen-docs/docs/releasing.html): How native-api-bindgen is released: version bumps, local checks, publishing to pub.dev and npm, GitHub Release binaries and the Homebrew tap.

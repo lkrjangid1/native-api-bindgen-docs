@@ -5,12 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Documentation — native-api-bindgen</title>
   <meta name="description" content="The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.">
+  <meta name="google-site-verification" content="Wh3NtRP5KxDYNAeBecAL9ccoGKLN7H6ll8bsdeZUZE4" />
   <link rel="canonical" href="https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html">
   <meta property="og:type" content="article">
+  <meta property="og:site_name" content="native-api-bindgen">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Documentation — native-api-bindgen">
   <meta property="og:description" content="The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.">
   <meta property="og:url" content="https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html">
-  <meta property="og:site_name" content="native-api-bindgen">
+  <meta property="og:image" content="https://lkrjangid1.github.io/native-api-bindgen-docs/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="native-api-bindgen: Android and iOS SDK APIs turned into typed Dart and TypeScript bindings">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Documentation — native-api-bindgen">
+  <meta name="twitter:description" content="The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.">
+  <meta name="twitter:image" content="https://lkrjangid1.github.io/native-api-bindgen-docs/images/og-image.jpg">
+  <meta name="twitter:image:alt" content="native-api-bindgen: Android and iOS SDK APIs turned into typed Dart and TypeScript bindings">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
@@ -18,7 +29,7 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Documentation","description":"The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html","inLanguage":"en"}</script>
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Documentation","description":"The native-api-bindgen documentation: guides, platform notes, architecture, configuration, error codes, benchmarks and legal policy.","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html","mainEntityOfPage":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html","image":"https://lkrjangid1.github.io/native-api-bindgen-docs/images/og-image.jpg","dateModified":"2026-10-06","inLanguage":"en","author":{"@type":"Organization","name":"native-api-bindgen","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/","logo":{"@type":"ImageObject","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/icon.svg"}},"publisher":{"@type":"Organization","name":"native-api-bindgen","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/","logo":{"@type":"ImageObject","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/icon.svg"}},"isPartOf":{"@type":"WebSite","name":"native-api-bindgen","url":"https://lkrjangid1.github.io/native-api-bindgen-docs/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://lkrjangid1.github.io/native-api-bindgen-docs/"},{"@type":"ListItem","position":2,"name":"Documentation","item":"https://lkrjangid1.github.io/native-api-bindgen-docs/docs.html"}]}]</script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
@@ -63,51 +74,51 @@
 <div class="wrap page-body prose">
 <h2 id="guides">Guides</h2>
 <div class="doc-cards">
-<a class="doc-card" href="docs/getting-started/index.html"><strong>Getting started (Flutter on Android)</strong><span>Beta (0.1.0-beta.1). Generated bindings are derived from the Android SDK on your machine and are kept local by default.</span></a>
-<a class="doc-card" href="docs/flutter/index.html"><strong>Flutter / Dart target</strong><span>Generated code uses only the officially supported Dart↔Java interop path: package:jni (the runtime used by jnigen)…</span></a>
-<a class="doc-card" href="docs/react-native/index.html"><strong>React Native</strong><span>Beta (0.1.0-beta.1). New Architecture only (TurboModules/JSI). Android (Java APIs) and iOS (Objective-C APIs) share…</span></a>
-<a class="doc-card" href="docs/android/index.html"><strong>Android support</strong><span>android.jar contains only public SDK stubs. A class absent from api-versions.xml is classified hidden_or_non_sdk…</span></a>
-<a class="doc-card" href="docs/ios/index.html"><strong>iOS / Apple (Flutter)</strong><span>Status: beta (0.1.0-beta.1). Flutter and React Native on iOS work end to end for Objective-C APIs from Foundation and…</span></a>
-<a class="doc-card" href="docs/native-ui.html"><strong>Native UI integration layer</strong><span>Generated bindings create native views like any other object; this layer shows them inside the framework's view tree…</span></a>
-<a class="doc-card" href="docs/troubleshooting/index.html"><strong>Troubleshooting</strong><span>Troubleshooting: native-api-bindgen documentation for generated Flutter and React Native bindings.</span></a>
+<a class="doc-card" href="docs/getting-started/index.html"><strong>Getting started (Flutter on Android)</strong><span>Step by step: install the native-api-bindgen CLI, check your machine, configure the Android APIs you need, and…</span></a>
+<a class="doc-card" href="docs/flutter/index.html"><strong>Flutter / Dart target</strong><span>How generated Flutter bindings call Android APIs through package:jni without MethodChannel: generated code shape…</span></a>
+<a class="doc-card" href="docs/react-native/index.html"><strong>React Native</strong><span>Generating a React Native bindings library for Android and iOS: setup, usage from TypeScript, call semantics, and the…</span></a>
+<a class="doc-card" href="docs/android/index.html"><strong>Android support</strong><span>What native-api-bindgen reads from android.jar and api-versions.xml, which Java and Kotlin API shapes it generates…</span></a>
+<a class="doc-card" href="docs/ios/index.html"><strong>iOS / Apple (Flutter)</strong><span>Generating Flutter bindings for iOS: Objective-C APIs via libclang, main-actor threading, blocks, protocols, and @objc…</span></a>
+<a class="doc-card" href="docs/native-ui.html"><strong>Native UI integration layer</strong><span>How generated bindings show native Android and iOS views inside Flutter and React Native view trees with native_api_ui…</span></a>
+<a class="doc-card" href="docs/troubleshooting/index.html"><strong>Troubleshooting</strong><span>Fixes for common native-api-bindgen problems: SDK not found, missing methods, unavailable APIs, released objects and…</span></a>
 </div>
 <h2 id="architecture">Architecture</h2>
 <div class="doc-cards">
-<a class="doc-card" href="docs/architecture/overview.html"><strong>Architecture overview</strong><span>The Native IR is the single source of truth. Parsers produce IR; generators consume IR. No generator reads SDK files…</span></a>
-<a class="doc-card" href="docs/architecture/ir.html"><strong>Native IR</strong><span>Package: packages/native_api_ir. Schema version: 1 (irSchemaVersion).</span></a>
-<a class="doc-card" href="docs/architecture/type-mapping.html"><strong>Type mapping (Flutter / Dart over package:jni)</strong><span>Implemented once in packages/native_api_generator/lib/src/type_mapping.dart (DartJniTypeMapper). Emitters never…</span></a>
-<a class="doc-card" href="docs/architecture/lifecycle.html"><strong>Native object lifecycle, callbacks and threading</strong><span>Every generated object is a package:jni global reference wrapped in a zero-cost extension type.</span></a>
-<a class="doc-card" href="docs/architecture/rn-jsi.html"><strong>React Native target: TypeScript → JSI → C++ → JNI / Objective-C</strong><span>Design choices (see docs/technical-design.md for the decision log):</span></a>
-<a class="doc-card" href="docs/technical-design.html"><strong>Technical design</strong><span>Status: living document. Scope: foundation + Android → Flutter vertical slice.</span></a>
+<a class="doc-card" href="docs/architecture/overview.html"><strong>Architecture overview</strong><span>How native-api-bindgen is structured: the IR as single source of truth, the packages, and the data flow from SDK…</span></a>
+<a class="doc-card" href="docs/architecture/ir.html"><strong>Native IR</strong><span>The Native IR: platform-neutral nodes, types, stable symbol IDs and validation rules that connect the SDK parsers to…</span></a>
+<a class="doc-card" href="docs/architecture/type-mapping.html"><strong>Type mapping (Flutter / Dart over package:jni)</strong><span>How Java and Kotlin types map to Dart types and JNI arguments in generated Flutter bindings, plus the naming rules for…</span></a>
+<a class="doc-card" href="docs/architecture/lifecycle.html"><strong>Native object lifecycle, callbacks and threading</strong><span>How generated bindings own native objects, release them, implement Java callbacks in Dart, and handle threads and…</span></a>
+<a class="doc-card" href="docs/architecture/rn-jsi.html"><strong>React Native target: TypeScript → JSI → C++ → JNI / Objective-C</strong><span>How generated React Native bindings call Android and iOS APIs: TypeScript modules, a JSI host object, a C++ Turbo…</span></a>
+<a class="doc-card" href="docs/technical-design.html"><strong>Technical design</strong><span>Design decisions behind native-api-bindgen: the IR, Android class-file parsing, Flutter Android generation, and what…</span></a>
 </div>
 <h2 id="reference">Reference</h2>
 <div class="doc-cards">
-<a class="doc-card" href="docs/error-codes.html"><strong>Diagnostic / error codes</strong><span>Codes are stable; never renumber. Each diagnostic carries code, severity (info|warning|error), symbolId (when…</span></a>
-<a class="doc-card" href="docs/versioning.html"><strong>Versioning</strong><span>Versioning: native-api-bindgen documentation for generated Flutter and React Native bindings.</span></a>
-<a class="doc-card" href="docs/compatibility/matrix.html"><strong>Compatibility matrix</strong><span>Only versions actually exercised are listed. "Tested" means automated tests ran against that version on 2026-10-05 on…</span></a>
-<a class="doc-card" href="docs/benchmarks/index.html"><strong>Benchmarks</strong><span>Benchmarks: native-api-bindgen documentation for generated Flutter and React Native bindings.</span></a>
-<a class="doc-card" href="docs/benchmarks/performance.html"><strong>Performance</strong><span>Measured on 2026-10-05 on the maintainer's Apple-silicon Mac. Emulator and simulator numbers are not device numbers…</span></a>
-<a class="doc-card" href="docs/benchmarks/size.html"><strong>Binary size</strong><span>Measured 2026-10-05 with tools/measure_size.py --platform 36 (Flutter 3.41.9, package:jni 1.0.3, release APK…</span></a>
-<a class="doc-card" href="docs/sources/official-sources.html"><strong>Official source registry</strong><span>Every parser/generator subsystem must name its first-party source. Links were last reviewed 2026-10-05…</span></a>
+<a class="doc-card" href="docs/error-codes.html"><strong>Diagnostic / error codes</strong><span>Every native-api-bindgen diagnostic code (E001 and up): what it means, why a symbol was skipped, and what to do about…</span></a>
+<a class="doc-card" href="docs/versioning.html"><strong>Versioning</strong><span>How native-api-bindgen versions the generator, the IR schema and generated APIs, and what counts as a breaking change.</span></a>
+<a class="doc-card" href="docs/compatibility/matrix.html"><strong>Compatibility matrix</strong><span>Versions of Flutter, Dart, React Native, Android SDK, Xcode and JDK that native-api-bindgen has been tested with, plus…</span></a>
+<a class="doc-card" href="docs/benchmarks/index.html"><strong>Benchmarks</strong><span>Index of native-api-bindgen benchmarks: release APK size of generated bindings and call overhead compared with…</span></a>
+<a class="doc-card" href="docs/benchmarks/performance.html"><strong>Performance</strong><span>Measured call overhead of generated Flutter and React Native bindings versus MethodChannel on Android and iOS, plus…</span></a>
+<a class="doc-card" href="docs/benchmarks/size.html"><strong>Binary size</strong><span>Measured app size impact of generated bindings: Flutter and React Native release APKs, iOS app size, App Bundle and…</span></a>
+<a class="doc-card" href="docs/sources/official-sources.html"><strong>Official source registry</strong><span>The first-party sources behind each native-api-bindgen parser and generator: local SDK inputs and official Flutter…</span></a>
 </div>
 <h2 id="project">Project</h2>
 <div class="doc-cards">
-<a class="doc-card" href="docs/roadmap.html"><strong>Roadmap</strong><span>Items below are plans, not features. Completed items are marked with the release that shipped them.</span></a>
-<a class="doc-card" href="docs/test-strategy.html"><strong>Test strategy</strong><span>Rules: no test may depend on network; golden tests must be stable across machines (no absolute paths, no timestamps)…</span></a>
-<a class="doc-card" href="docs/implementation-plan.html"><strong>Implementation plan</strong><span>Mirrors TRD §82. Each stage ends with: format → analyze → unit tests → generation tests → integration tests (where…</span></a>
+<a class="doc-card" href="docs/roadmap.html"><strong>Roadmap</strong><span>Planned work for native-api-bindgen by phase: Android and iOS API coverage, callbacks, generics, Kotlin and Swift…</span></a>
+<a class="doc-card" href="docs/test-strategy.html"><strong>Test strategy</strong><span>How native-api-bindgen is tested: unit, fuzz, fixture, golden and integration tests on emulators and simulators, and…</span></a>
+<a class="doc-card" href="docs/implementation-plan.html"><strong>Implementation plan</strong><span>The staged implementation plan for native-api-bindgen and the quality gates every stage passes: format, analyze, unit…</span></a>
 </div>
 <h2 id="legal">Legal</h2>
 <div class="doc-cards">
-<a class="doc-card" href="docs/legal/license-policy.html"><strong>License policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
-<a class="doc-card" href="docs/legal/source-provenance.html"><strong>Source provenance</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
-<a class="doc-card" href="docs/legal/android.html"><strong>Android legal / attribution policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
-<a class="doc-card" href="docs/legal/apple.html"><strong>Apple SDK policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
-<a class="doc-card" href="docs/legal/flutter.html"><strong>Flutter / Dart policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
-<a class="doc-card" href="docs/legal/react-native.html"><strong>React Native policy</strong><span>Not legal advice. This document describes engineering policy. Organizations should perform their own legal review…</span></a>
+<a class="doc-card" href="docs/legal/license-policy.html"><strong>License policy</strong><span>The native-api-bindgen license policy: Apache-2.0 project source, what it does not cover, and how audit-license…</span></a>
+<a class="doc-card" href="docs/legal/source-provenance.html"><strong>Source provenance</strong><span>Where every input and output of native-api-bindgen comes from: what is consumed locally, what is redistributed, and…</span></a>
+<a class="doc-card" href="docs/legal/android.html"><strong>Android legal / attribution policy</strong><span>How native-api-bindgen uses the Android SDK: inputs, documentation licensing, redistribution of generated bindings…</span></a>
+<a class="doc-card" href="docs/legal/apple.html"><strong>Apple SDK policy</strong><span>How native-api-bindgen reads Apple SDK headers in place with Xcode, what it never copies, and what the Xcode and Apple…</span></a>
+<a class="doc-card" href="docs/legal/flutter.html"><strong>Flutter / Dart policy</strong><span>Policy for Flutter and Dart: package:jni as a normal pub dependency, the documented Java interop path, no…</span></a>
+<a class="doc-card" href="docs/legal/react-native.html"><strong>React Native policy</strong><span>Policy for React Native: New Architecture via documented Turbo Module setup, no vendored React Native sources, and…</span></a>
 </div>
 <h2 id="more">More</h2>
 <div class="doc-cards">
-<a class="doc-card" href="docs/releasing.html"><strong>Releasing</strong><span>Versions are shared by every package. Beta releases use X.Y.Z-beta.N.</span></a>
+<a class="doc-card" href="docs/releasing.html"><strong>Releasing</strong><span>How native-api-bindgen is released: version bumps, local checks, publishing to pub.dev and npm, GitHub Release…</span></a>
 </div>
 
 
