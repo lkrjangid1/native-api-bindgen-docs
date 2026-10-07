@@ -95,7 +95,7 @@
 <tr>
 <td>Android device (emulator)</td>
 <td>API 37 (<code>Pixel_7</code> AVD, arm64)</td>
-<td>19 Flutter integration tests (incl. native view, Flow, typed constants, bytes)</td>
+<td>26 Flutter integration tests (19 binding features incl. native view, Flow, typed constants, bytes; 7 showcase tasks: device status, clipboard, SharedPreferences, vibration, text-to-speech, settings intents, UI)</td>
 </tr>
 <tr>
 <td>Generated <code>minApi</code> guards</td>
@@ -125,7 +125,7 @@
 <tr>
 <td>iOS runtime (simulator)</td>
 <td>26.4 (iPhone 17)</td>
-<td>22 Flutter integration tests (<code>examples/flutter/ios_slice</code>, deployment target 15.0; incl. blocks, main-actor check, native view, Swift adapters). iOS 27.0 simulators: React Native template apps without UIScene adoption do not launch (not a binding issue)</td>
+<td>28 Flutter integration tests (<code>examples/flutter/ios_slice</code>; 21 binding features and 7 showcase tasks, deployment target 15.0; incl. blocks, main-actor check, native view, Swift adapters). iOS 27.0 simulators: React Native template apps without UIScene adoption do not launch (not a binding issue)</td>
 </tr>
 <tr>
 <td><code>package:objective_c</code></td>
@@ -145,12 +145,12 @@
 <tr>
 <td>React Native on iOS</td>
 <td>0.87.1 (New Architecture, Hermes), CocoaPods 1.16.2</td>
-<td>release build for the iOS 26.4 simulator; 16 self-tests (<code>tools/run_rn_ios_tests.sh</code>; incl. blocks, protocols in JS, NSData, native view)</td>
+<td>release build for the iOS 26.4 simulator; 19 self-tests (<code>tools/run_rn_ios_tests.sh</code>; incl. showcase tasks, blocks, protocols in JS, NSData, native view)</td>
 </tr>
 <tr>
 <td>React Native on Android</td>
 <td>0.87.1 (New Architecture, Hermes)</td>
-<td>RN example release build (R8); 17 self-tests on the API 37 emulator (incl. suspend → Promise, <code>Uint8Array</code>, native view); Jest runtime tests</td>
+<td>RN example release build (R8); 20 self-tests on the API 37 emulator (incl. showcase tasks, suspend → Promise, <code>Uint8Array</code>, native view); Jest runtime tests</td>
 </tr>
 <tr>
 <td><code>native_api_ui</code> (Flutter plugin)</td>

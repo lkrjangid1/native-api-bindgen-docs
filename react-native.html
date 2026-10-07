@@ -79,7 +79,7 @@
   <li>iOS: <code>pod 'NativeApiBindings', :path =&gt; '../native-api-bindings'</code>.</li>
 </ul>
 <p>The generated library embeds the runtime. To depend on it instead, install <code>native-api-bindgen-runtime</code> from <a href="https://www.npmjs.com/package/native-api-bindgen-runtime">npm</a> (<code>npm install native-api-bindgen-runtime@beta</code>).</p>
-<p>The repository's <code>examples/react-native/slice</code> app does all of this and runs 12 self-tests on each platform.</p>
+<p>The repository's <code>examples/react-native/slice</code> app does all of this. Its Showcase tab does real tasks (device dashboard, text-to-speech, share sheet, clipboard, persistent note, haptics) and its self-test suite passes 20 tests on the Android emulator and 19 on the iOS simulator (see <a href="examples.html">Examples</a>).</p>
 
 <h2>Measured</h2>
 <p>Release builds: about 1.50 µs per JSI → JNI call (Android emulator) and 1.14 µs per JSI → Objective-C call on the JS thread (iOS simulator); UIKit calls that hop to the main thread take about 10.0 µs. Metro does not tree-shake: the example's release APK is 19,312,390 bytes with bindings for its slice and 57,776,278 bytes with the whole Android SDK generated (baseline 18,623,666 bytes) — generate only what you use.</p>

@@ -234,7 +234,7 @@ native-api-bindgen update                          # regenerates every configure
 <h2 id="tested-2026-10-05-maintainer-machine">Tested (2026-10-05, maintainer machine)<a class="anchor" href="#tested-2026-10-05-maintainer-machine" aria-label="Link to this section">#</a></h2>
 <ul>
 <li>
-<p>React Native 0.87.1 (<code>examples/react-native/slice</code>, release build with bundled JS): <strong>12/12 self-tests passing</strong> on the same iPhone 17 / iOS 26.4 simulator (<code>tools/run_rn_ios_tests.sh</code>). All of Foundation + UIKit as React Native bindings: 15,401 bound members, TypeScript type-checks with zero errors, C++ tables compile with <code>-Werror</code>.</p>
+<p>React Native 0.87.1 (<code>examples/react-native/slice</code>, release build with bundled JS): <strong>19/19 self-tests passing</strong>, including the showcase tasks on the same iPhone 17 / iOS 26.4 simulator (<code>tools/run_rn_ios_tests.sh</code>). All of Foundation + UIKit as React Native bindings: 15,401 bound members, TypeScript type-checks with zero errors, C++ tables compile with <code>-Werror</code>.</p>
 </li>
 <li>
 <p>Xcode 27.0, iPhoneSimulator SDK 27.0; <code>examples/flutter/ios_slice</code> integration tests: <strong>12/12 passing</strong> on an iPhone 17 simulator running iOS 26.4 (<code>flutter test integration_test -d &lt;udid&gt;</code>). The availability-guard test calls an iOS 27.0 API on the iOS 26.4 runtime and expects <code>OsVersionError</code>.</p>
